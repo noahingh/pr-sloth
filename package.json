@@ -24,7 +24,9 @@
     "build": "yarn run build:chrome && yarn run build:firefox && yarn run build:opera",
     "test": "jest --watch",
     "lint": "eslint . --ext .js,.jsx",
-    "lint:fix": "eslint . --ext .js,.jsx --fix"
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.2",
@@ -36,6 +38,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
+    "storybook": "^6.0.26",
     "webext-base-css": "^1.1.0",
     "webextension-polyfill": "^0.6.0"
   },
@@ -48,6 +51,10 @@
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.1",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/react": "^6.0.26",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "autoprefixer": "^9.8.0",
@@ -73,6 +80,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
+    "react-is": "^16.13.1",
     "redux-mock-store": "^1.5.4",
     "resolve-url-loader": "^3.1.1",
     "sass-loader": "^8.0.2",
