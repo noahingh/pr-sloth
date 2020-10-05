@@ -23,7 +23,7 @@ export default class PRList extends React.Component {
                         this.onPagination(page, pageSize);
                     },
                 }}
-                dataSource={this.props.items}
+                dataSource={this.props.pullRequests}
                 renderItem={item => (
                     <List.Item>
                         <List.Item.Meta
@@ -52,7 +52,7 @@ PRList.propTypes = {
     /**
      * Array of objects.
      */
-    items: PropTypes.arrayOf(PropTypes.exact({
+    pullRequests: PropTypes.arrayOf(PropTypes.exact({
         fullName: PropTypes.string,
         title: PropTypes.string,
     })),

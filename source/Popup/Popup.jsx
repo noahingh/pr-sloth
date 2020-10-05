@@ -1,55 +1,33 @@
 import React from 'react';
-import browser from 'webextension-polyfill';
+// import browser from 'webextension-polyfill';
+import { Row, Col } from 'antd';
+import PRList from '../components/PRList';
+import SearchByTabs from '../components/SearchByTabs';
 
-import './styles.scss';
+// function openWebPage(url) {
+//   return browser.tabs.create({ url });
+// }
 
-function openWebPage(url) {
-  return browser.tabs.create({url});
+class Popup extends React.Component {
+  render() {
+    return (
+      <section>
+        <Row style={{marginBottom: "5px"}}>
+          <Col>
+            <SearchByTabs
+              searchBys={this.props.searchBys}
+              onChange={this.props.onSearchByChange}
+            />
+          </Col>
+        </Row>
+        <PRList
+          totalCount={this.props.totalCount}
+          pullRequests={this.props.pullRequests}
+          onPagination={this.props.onPagination}
+        />
+      </section>
+    )
+  }
 }
 
-const Popup = () => {
-  return (
-    <section id="popup">
-      <h2>WEB-EXTENSION-STARTER</h2>
-      <button
-        id="options__button"
-        type="button"
-        onClick={() => {
-          return openWebPage('options.html');
-        }}
-      >
-        Options Page
-      </button>
-      <div className="links__holder">
-        <ul>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                return openWebPage(
-                  'https://github.com/abhijithvijayan/web-extension-starter'
-                );
-              }}
-            >
-              GitHub
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                return openWebPage(
-                  'https://www.buymeacoffee.com/abhijithvijayan'
-                );
-              }}
-            >
-              Buy Me A Coffee
-            </button>
-          </li>
-        </ul>
-      </div>
-    </section>
-  );
-};
-
-export default Popup;
+export { Popup };

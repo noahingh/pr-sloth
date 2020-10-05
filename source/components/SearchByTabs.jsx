@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Radio } from 'antd';
 
 export default class SearchByTabs extends React.Component {
-    state = { currentValue: (this.props.items.length > 0 ? this.props.items[0].value : "") };
+    state = { currentValue: (this.props.searchBys.length > 0 ? this.props.searchBys[0].value : "") };
 
     render() {
         const { currentValue } = this.state;
@@ -11,12 +11,12 @@ export default class SearchByTabs extends React.Component {
             <Radio.Group
                 onChange={e => {
                     this.setState({ currentValue: e.target.value });
-                    this.props.onChange(e.target.value);
+                    this.props.onSearchByChange(e.target.value);
                 }}
                 value={currentValue}
                 style={{ marginBottom: 8, borderRadius: "6px" }}>
                 {
-                    this.props.items.map((item => {
+                    this.props.searchBys.map((item => {
                         return <Radio.Button value={item.value}>{item.display}</Radio.Button>
                     }))
                 }
@@ -29,12 +29,12 @@ SearchByTabs.propTypes = {
     /**
      * Array of objects.
      */
-    items: PropTypes.arrayOf(PropTypes.exact({
+    searchBys: PropTypes.arrayOf(PropTypes.exact({
         display: PropTypes.string,
         value: PropTypes.string,
     })),
     /**
      * Function of onChange.
      */
-    onChange: PropTypes.func,
+    onSearchByChange: PropTypes.func,
 }

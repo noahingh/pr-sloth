@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchByTabs from './SearchByTabs';
+import { Popup } from './Popup';
 
 export default {
-    title: 'Components/SearchByTabs',
-    component: SearchByTabs,
+    title: 'Views/Popup',
+    component: Popup,
 }
-const Template = (args) => <SearchByTabs {...args} />
+const Template = (args) => <Popup {...args} />
 
 export const Default = Template.bind({});
 Default.args = {
@@ -27,5 +27,17 @@ Default.args = {
             value: 'review-requested',
         },
     ],
-    onSearchByChange: function (value) { },
+    onSearchByChange: function () {},
+    totalCount: 2,
+    pullRequests: [
+        {
+            fullName: 'octocat/pr-sloth',
+            title: 'Add a new component.',
+        },
+        {
+            fullName: 'octocat/pr-sloth',
+            title: 'Add a new component.',
+        }
+    ],
+    onPagination: function () { },
 };
