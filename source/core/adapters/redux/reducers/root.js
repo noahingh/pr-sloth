@@ -15,6 +15,10 @@ export const initState =
        */
       q: '',
       /**
+       * Total count of pull request.
+       */
+      totalCount: 0,
+      /**
        * Array of instance of PullRequest.
        */
       pullRequests: [],
@@ -25,6 +29,12 @@ export function rootReducer(state, action) {
    * fetch pull requests
    */
   switch (action.type) {
+    case actions.SET_TOTAL_COUNT:
+      const totalCount = action.totalCount
+      return {
+        ...state,
+        totalCount: totalCount,
+      };
     case actions.RECEIVE_PULL_REQUESTS_SUCCESS:
       const pullRequests = action.pullRequests
       return {
