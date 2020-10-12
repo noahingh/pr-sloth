@@ -3,6 +3,12 @@ import * as actions from '../actions'
 export const initState =
     {
       /**
+       * Login of user.
+       *
+       * TODO: complete fetchUser.
+       */
+      login: 'hanjunlee',
+      /**
        * Bool of pr opened.
        */
       isOpen: true,
@@ -19,6 +25,14 @@ export const initState =
        */
       totalCount: 0,
       /**
+       * Page of pull request.
+       */
+      page: 1,
+      /**
+       * Count of pull request for a page.
+       */
+      perPage: 3,
+      /**
        * Array of instance of PullRequest.
        */
       pullRequests: [],
@@ -33,8 +47,18 @@ export function rootReducer(state, action) {
       const totalCount = action.totalCount
       return {
         ...state,
-        totalCount: totalCount,
+        totalCount,
       };
+    case actions.SET_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      }
+    case actions.SET_PER_PAGE:
+      return {
+        ...state,
+        perPage: action.perPage,
+      }
     case actions.RECEIVE_PULL_REQUESTS_SUCCESS:
       const pullRequests = action.pullRequests
       return {
@@ -49,7 +73,8 @@ export function rootReducer(state, action) {
   switch (action.type) {
     case actions.BUILD_QUERY:
       // TODO: change user name.
-      const q = buildQuery('hanjunlee', {
+      const q = buildQuery({
+        login: state.login,
         isOpen: state.isOpen,
         searchBy: state.searchBy,
       })
@@ -64,8 +89,8 @@ export function rootReducer(state, action) {
   }
 }
 
-function buildQuery(userName, {isOpen, searchBy}) {
-  var q = ''
+function buildQuery({login, isOpen, searchBy}) {
+  var q = 'type:pr ';
 
   // open or closed
   switch (isOpen) {
@@ -94,7 +119,7 @@ function buildQuery(userName, {isOpen, searchBy}) {
     default:
       q += 'author:';
   }
-  q += userName + ' '
+  q += login + ' '
 
   return q
 }

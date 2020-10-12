@@ -3,6 +3,8 @@ import PullRequest from '../../../models/PullRequest'
 import Repo from '../../../models/Repo'
 
 export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+export const SET_PAGE = 'SET_PAGE'
+export const SET_PER_PAGE = 'SET_PER_PAGE'
 export const RECEIVE_PULL_REQUESTS_SUCCESS = 'RECEIVE_PULL_REQUESTS_SUCCESS'
 export const RECEIVE_PULL_REQUESTS_FAILED = 'RECEIVE_PULL_REQUESTS_FAILED'
 
@@ -11,6 +13,20 @@ export function setTotalCount(count) {
     type: SET_TOTAL_COUNT,
     totalCount: count,
   };
+}
+
+export function setPage(page) {
+  return {
+    type: SET_PAGE,
+    page: page,
+  }
+}
+
+export function setPerPage(perPage) {
+  return {
+    type: SET_PER_PAGE,
+    perPage: perPage,
+  }
 }
 
 function receivePullRequestsSuccess(prs) {
@@ -42,18 +58,21 @@ function convertRepoDTO(data) {
   });
 }
 
-export function fetchPullRequests(token, query) {
+export function fetchPullRequests(token, {q, page}) {
   return async (dispatch) => {
     const octokit = new Octokit({auth: token});
-    const q = query
 
     try {
       const {data: searchData} = await octokit.search.issuesAndPullRequests({
         q,
+        page,
+        per_page: 3,
       });
 
       // Dispatch total count.
       dispatch(setTotalCount(searchData.total_count));
+      dispatch(setPage(page));
+      dispatch(setPerPage(3));
 
       // Convert into Pullrequest entity.
       const pullRequests = await Promise.all(searchData.items.map(async item => {

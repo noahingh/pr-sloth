@@ -33,7 +33,7 @@ test('buildQuery with initState', () => {
   };
 
   var expected = {...initState};
-  expected.q = 'is:open author:hanjunlee '
+  expected.q = 'type:pr is:open author:hanjunlee '
 
   expect(rootReducer(initState, action)).toEqual(expected);
 })
@@ -50,7 +50,7 @@ test('buildQuery with {closed, asignee}', () => {
   };
 
   var expected = {...state};
-  expected.q = 'is:closed assignee:hanjunlee '
+  expected.q = 'type:pr is:closed assignee:hanjunlee '
 
   expect(rootReducer(state, action)).toEqual(expected);
 })
