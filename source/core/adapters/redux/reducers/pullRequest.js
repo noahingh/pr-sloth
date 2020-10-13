@@ -19,7 +19,7 @@ export const initState = {
   pullRequests: [],
 }
 
-export function pullRequestReducer(state, action) {
+export function pullRequestReducer(state = initState, action) {
   switch (action.type) {
     case actions.SET_TOTAL_COUNT:
       const totalCount = action.totalCount
@@ -43,5 +43,7 @@ export function pullRequestReducer(state, action) {
         ...state,
         pullRequests,
       };
+    default:
+      return state
   }
 }

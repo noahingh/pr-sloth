@@ -38,6 +38,8 @@ export function queryBuilderReducer(state = initState, action) {
         ...state,
         searchBy: action.searchBy,
       };
+    default:
+      return state
   }
 }
 

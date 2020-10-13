@@ -3,7 +3,7 @@ import * as actions from '../actions';
 import {pullRequestReducer} from './pullRequest';
 import {queryBuilderReducer} from './queryBuilder';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   pullRequest: pullRequestReducer,
   queryBuilder: queryBuilderReducer,
 });
