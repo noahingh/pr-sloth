@@ -29,6 +29,8 @@ Default.args = {
     ],
     onSearchByChange: function () {},
     totalCount: 2,
+    page: 1,
+    perPage: 3,
     pullRequests: [
         {
             fullName: 'octocat/pr-sloth',

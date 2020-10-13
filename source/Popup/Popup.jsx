@@ -22,6 +22,8 @@ class Popup extends React.Component {
         </Row>
         <PRList
           totalCount={this.props.totalCount}
+          page={this.props.page}
+          perPage={this.props.perPage}
           pullRequests={this.props.pullRequests}
           onPagination={this.props.onPagination}
         />

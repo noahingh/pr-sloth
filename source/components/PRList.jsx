@@ -17,10 +17,11 @@ export default class PRList extends React.Component {
                 itemLayout="horizontal"
                 // size="large"
                 pagination={{
-                    defaultPageSize: 3,
+                    current: this.props.page,
+                    pageSize: this.props.perPage,
                     total: this.props.totalCount,
                     onChange: (page, pageSize) => {
-                        this.onPagination(page, pageSize);
+                        this.props.onPagination(page, pageSize);
                     },
                 }}
                 dataSource={this.props.pullRequests}
@@ -49,6 +50,14 @@ PRList.propTypes = {
      * Size of items.
      */
     totalCount: PropTypes.number,
+    /**
+     * Current page number.
+     */
+    page: PropTypes.number,
+    /**
+     * Number of items per page.
+     */
+    perPage: PropTypes.number,
     /**
      * Array of objects.
      */
