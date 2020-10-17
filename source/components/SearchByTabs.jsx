@@ -14,6 +14,7 @@ export default class SearchByTabs extends React.Component {
                     this.props.onSearchByChange(e.target.value);
                 }}
                 value={currentValue}
+                buttonStyle="solid"
                 style={{ marginBottom: 8, borderRadius: "6px" }}>
                 {
                     this.props.searchBys.map((item) =>
