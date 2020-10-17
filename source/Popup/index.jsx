@@ -14,7 +14,6 @@ const store = configureStore();
 
 // init store
 store.dispatch(actions.setToken(''))
-store.dispatch(actions.buildQuery())
 
 ReactDOM.render(
     <Provider store={store}>

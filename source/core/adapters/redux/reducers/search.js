@@ -25,28 +25,24 @@ export const initState = {
 export function searchReducer(state = initState, action) {
   switch (action.type) {
     case actions.SET_TOKEN:
-      return {
+      state = {
         ...state,
         token: action.token,
-      };
-    case actions.BUILD_QUERY:
-      const q = buildQuery({
-        login: state.login,
-        isOpen: state.isOpen,
-        searchBy: state.searchBy,
-      })
-      return {
-        ...state,
-        q,
-      };
+      }
+      break;
     case actions.SEARCH_BY:
-      return {
+      state = {
         ...state,
         searchBy: action.searchBy,
       };
-    default:
-      return state
+      break;
   }
+  
+  const q = buildQuery(state)
+  return {
+    ...state,
+    q,
+  };
 }
 
 function buildQuery({login, isOpen, searchBy}) {

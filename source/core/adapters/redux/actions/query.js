@@ -1,17 +1,10 @@
 export const SET_TOKEN = 'SET_TOKEN'
-export const BUILD_QUERY = 'BUILD_QUERY'
 export const SEARCH_BY = 'SEARCH_BY'
 
 export function setToken(token) {
   return {
     type: SET_TOKEN,
     token,
-  };
-}
-
-export function buildQuery() {
-  return {
-    type: BUILD_QUERY,
   };
 }
 

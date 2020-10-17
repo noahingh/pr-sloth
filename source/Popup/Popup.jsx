@@ -32,7 +32,7 @@ const searchBys = [
 
 export class Popup extends React.Component {
   componentDidMount() {
-    this.props.onPagination(1);
+    this.props.setPage(1);
   }
 
   render() {
@@ -42,7 +42,7 @@ export class Popup extends React.Component {
           <Col >
             <SearchByTabs
               searchBys={searchBys}
-              onSearchByChange={this.props.onSearchByChange}
+              onSearchByChange={this.props.setSearchBy}
             />
           </Col>
           <Col offset="1">
@@ -58,7 +58,7 @@ export class Popup extends React.Component {
           page={this.props.page}
           perPage={this.props.perPage}
           pullRequests={this.props.pullRequests}
-          onPagination={this.props.onPagination}
+          onPagination={this.props.setPage}
         />
       </section>
     )
@@ -86,8 +86,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSearchByChange: (value) => dispatch(actions.setSearchBy(value)),
-    onPagination: (page) => dispatch(actions.fetchPullRequests(page)),
+    setSearchBy: (value) => {
+      dispatch(actions.setSearchBy(value));
+      dispatch(actions.fetchPullRequests(1));
+    },
+    setPage: (page) => dispatch(actions.fetchPullRequests(page)),
   };
 }
 

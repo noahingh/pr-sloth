@@ -2,12 +2,14 @@ import * as actions from '../actions'
 
 import {initState, searchReducer} from './search'
 
-test('buildQuery with initState', () => {
+test('setToken', () => {
   const action = {
-    type: actions.BUILD_QUERY,
+    type: actions.SET_TOKEN,
+    token: 'token'
   };
 
   var expected = {...initState};
+  expected.token = 'token'
   expected.q = 'type:pr is:open author:hanjunlee '
 
   expect(searchReducer(initState, action)).toEqual(expected);
@@ -20,6 +22,7 @@ test('searchBy', () => {
   };
   var expected = {...initState};
   expected.searchBy = actions.searchByAssignee;
+  expected.q = 'type:pr is:open assignee:hanjunlee '
 
   expect(searchReducer(initState, action)).toEqual(expected);
 })
