@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import {configureStore} from '../core/adapters/redux';
-import Popup from './Popup';
+import Main from '../containers/Main';
 import { actions } from '../core/adapters/redux';
 
 import 'antd/dist/antd.css';
@@ -17,6 +17,6 @@ store.dispatch(actions.setToken(''))
 
 ReactDOM.render(
     <Provider store={store}>
-       <Popup />
+       <Main />
     </Provider>
 , document.getElementById('popup-root'));

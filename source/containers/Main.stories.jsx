@@ -1,11 +1,11 @@
 import React from 'react';
-import { Popup } from './Popup';
+import { Main } from './Main';
 
 export default {
-    title: 'Views/Popup',
-    component: Popup,
+    title: 'Views/Main',
+    component: Main,
 }
-const Template = (args) => <Popup {...args} />
+const Template = (args) => <Main {...args} />
 
 export const Default = Template.bind({});
 Default.args = {

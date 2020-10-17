@@ -30,7 +30,7 @@ const searchBys = [
   },
 ];
 
-export class Popup extends React.Component {
+export class Main extends React.Component {
   componentDidMount() {
     this.props.setPage(1);
   }
@@ -94,4 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Popup)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
