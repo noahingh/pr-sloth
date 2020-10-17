@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Octokit } from '@octokit/rest'
-import browser from 'webextension-polyfill';
 import { Form, Input, Button } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { actions } from '../core/adapters/redux';
+import * as browser from '../core/adapters/browser';
 
 export class Signin extends React.Component {
     async validateToken(token) {
@@ -60,7 +60,7 @@ function mapDispatchToProps(dispatch) {
         setToken: (values) => {
             const { token } = values;
             // TODO: make to re-use.
-            browser.storage.local.set({ "pr-sloth-token": token });
+            browser.storeToken(token);
             dispatch(actions.setToken(token))
         },
     }
