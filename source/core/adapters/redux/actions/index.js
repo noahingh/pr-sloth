@@ -13,8 +13,6 @@ export {
 export {
     SET_TOKEN,
     setToken,
-    BUILD_QUERY, 
-    buildQuery, 
     SEARCH_BY, 
     setSearchBy, 
     searchByAuthor, 
