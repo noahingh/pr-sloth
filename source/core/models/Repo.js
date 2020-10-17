@@ -1,9 +1,17 @@
 export default class Repo {
   constructor({
-    fullName,
-    url,
+    owner,
+    repo,
   }) {
-    this.fullName = fullName;
-    this.url = url;
+    this.owner = owner;
+    this.repo = repo;
+  }
+
+  get fullName() {
+    return this.owner + "/" + this.repo;
+  }
+
+  get htmlUrl() {
+    return "https://github.com/".concat(this.owner, "/", this.repo)
   }
 }

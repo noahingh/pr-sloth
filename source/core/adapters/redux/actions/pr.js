@@ -44,46 +44,40 @@ function receivePullRequestsFailed(e) {
 }
 
 function convertPullRequestDTO(data) {
-  return new PullRequest({
-    number: data.number,
-    title: data.title,
-    body: data.body,
-  })
-}
+  const {number, title, body, repository_url} = data;
+  const {owner, repo} = parseRepositoryUrl(repository_url);
 
-function convertRepoDTO(data) {
-  return new Repo({
-    fullName: data.full_name,
-    url: data.html_url,
+  return new PullRequest({
+    number,
+    title,
+    body,
+    repo: new Repo({
+      owner,
+      repo,
+    }),
   });
 }
 
-export function fetchPullRequests(token, {q, page}) {
-  return async (dispatch) => {
+export function fetchPullRequests(page) {
+  return async (dispatch, getStore) => {
+    const { token, q } = getStore().search;
     const octokit = new Octokit({auth: token});
 
     try {
-      const {data: searchData} = await octokit.search.issuesAndPullRequests({
+      const {data} = await octokit.search.issuesAndPullRequests({
         q,
         page,
         per_page: 3,
       });
 
       // Dispatch total count.
-      dispatch(setTotalCount(searchData.total_count));
+      dispatch(setTotalCount(data.total_count));
       dispatch(setPage(page));
       dispatch(setPerPage(3));
 
-      // Convert into Pullrequest entity.
-      const pullRequests = await Promise.all(searchData.items.map(async item => {
-        const {owner, repo} = parseRepositoryUrl(item.repository_url);
-        const {data: repoData} = await octokit.repos.get({
-          owner,
-          repo,
-        });
-
+      // pull requests
+      const pullRequests = await Promise.all(data.items.map(async item => {
         var pullRequest = convertPullRequestDTO(item);
-        pullRequest.repo = convertRepoDTO(repoData);
         return pullRequest
       })) 
 

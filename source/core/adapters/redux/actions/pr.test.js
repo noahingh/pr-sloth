@@ -30,18 +30,13 @@ test('simple fetch pull-requests', () => {
     ],
   });
 
-  nock('https://api.github.com').get('/repos/sloth/pr-sloth').reply(200, {
-    full_name: 'sloth/pr-sloth',
-    html_url: 'https://github.com/sloth/pr-sloth',
+  const store = mockStore({ 
+    search: { token: '', q: '' },
+    list: {
+      totalcount: 0, 
+      pullRequests: [],
+    },
   });
-
-  nock('https://api.github.com').get('/repos/sloth/pr-sloth').reply(200, {
-    full_name: 'sloth/pr-sloth',
-    html_url: 'https://github.com/sloth/pr-sloth',
-  });
-
-
-  const store = mockStore({totalcount: 0, pullRequests: []})
   const expectedActions = [
     {
       type: SET_TOTAL_COUNT,
@@ -63,8 +58,8 @@ test('simple fetch pull-requests', () => {
           title: 'Add a new component',
           body: '',
           repo: new Repo({
-            fullName: 'sloth/pr-sloth',
-            url: 'https://github.com/sloth/pr-sloth'
+            owner: 'sloth',
+            repo: 'pr-sloth'
           }),
         }),
         new PullRequest({
@@ -72,14 +67,14 @@ test('simple fetch pull-requests', () => {
           title: 'Fix the bug',
           body: '',
           repo: new Repo({
-            fullName: 'sloth/pr-sloth',
-            url: 'https://github.com/sloth/pr-sloth'
+            owner: 'sloth',
+            repo: 'pr-sloth'
           }),
         }),
       ],
     },
   ];
 
-  return store.dispatch(fetchPullRequests('', {q: '', page: 1}))
+  return store.dispatch(fetchPullRequests(1))
       .then(() => {expect(store.getActions()).toEqual(expectedActions)})
 })
