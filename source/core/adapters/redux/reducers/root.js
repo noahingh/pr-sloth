@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import * as actions from '../actions';
-import {pullRequestReducer} from './pullRequest';
-import {queryBuilderReducer} from './queryBuilder';
+import {listReducer} from './list';
+import {searchReducer} from './search';
 
 export const rootReducer = combineReducers({
-  pullRequest: pullRequestReducer,
-  queryBuilder: queryBuilderReducer,
+  list: listReducer,
+  search: searchReducer,
 });

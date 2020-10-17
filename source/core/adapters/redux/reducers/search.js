@@ -1,6 +1,7 @@
 import * as actions from '../actions'
 
 export const initState = {
+  token: '',
   /**
    * Login of user.
    *
@@ -21,8 +22,13 @@ export const initState = {
   q: '',
 };
 
-export function queryBuilderReducer(state = initState, action) {
+export function searchReducer(state = initState, action) {
   switch (action.type) {
+    case actions.SET_TOKEN:
+      return {
+        ...state,
+        token: action.token,
+      };
     case actions.BUILD_QUERY:
       const q = buildQuery({
         login: state.login,

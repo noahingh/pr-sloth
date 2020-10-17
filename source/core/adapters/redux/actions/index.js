@@ -11,6 +11,8 @@ export {
 } from './pr'
 
 export {
+    SET_TOKEN,
+    setToken,
     BUILD_QUERY, 
     buildQuery, 
     SEARCH_BY, 

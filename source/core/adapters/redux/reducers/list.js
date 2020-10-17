@@ -19,7 +19,7 @@ export const initState = {
   pullRequests: [],
 }
 
-export function pullRequestReducer(state = initState, action) {
+export function listReducer(state = initState, action) {
   switch (action.type) {
     case actions.SET_TOTAL_COUNT:
       const totalCount = action.totalCount

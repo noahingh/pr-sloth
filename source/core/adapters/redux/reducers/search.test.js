@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 
-import {initState, queryBuilderReducer} from './queryBuilder'
+import {initState, searchReducer} from './search'
 
 test('buildQuery with initState', () => {
   const action = {
@@ -10,7 +10,7 @@ test('buildQuery with initState', () => {
   var expected = {...initState};
   expected.q = 'type:pr is:open author:hanjunlee '
 
-  expect(queryBuilderReducer(initState, action)).toEqual(expected);
+  expect(searchReducer(initState, action)).toEqual(expected);
 })
 
 test('searchBy', () => {
@@ -21,5 +21,5 @@ test('searchBy', () => {
   var expected = {...initState};
   expected.searchBy = actions.searchByAssignee;
 
-  expect(queryBuilderReducer(initState, action)).toEqual(expected);
+  expect(searchReducer(initState, action)).toEqual(expected);
 })

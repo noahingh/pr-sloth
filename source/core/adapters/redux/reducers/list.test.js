@@ -1,7 +1,7 @@
 import PullRequest from '../../../models/PullRequest'
 import * as actions from '../actions'
 
-import {initState, pullRequestReducer} from './pullRequest'
+import {initState, listReducer} from './list'
 
 test('fetch pull requests', () => {
   const action = {
@@ -12,5 +12,5 @@ test('fetch pull requests', () => {
   var expected = {...initState};
   expected.pullRequests = [new PullRequest({number: 1})];
 
-  expect(pullRequestReducer(initState, action)).toEqual(expected);
+  expect(listReducer(initState, action)).toEqual(expected);
 });
