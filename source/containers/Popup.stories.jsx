@@ -23,6 +23,6 @@ Default.args = {
             pullRequestTitle: 'Add a new component.',
         }
     ],
-    onSearchByChange: function () {},
-    onPagination: function () { },
+    setSearchBy: function () { },
+    setPage: function () {},
 };
