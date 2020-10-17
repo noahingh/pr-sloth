@@ -59,7 +59,6 @@ function mapDispatchToProps(dispatch) {
     return {
         setToken: (values) => {
             const { token } = values;
-            // TODO: make to re-use.
             browser.storeToken(token);
             dispatch(actions.setToken(token))
         },
