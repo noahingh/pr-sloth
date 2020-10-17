@@ -16,9 +16,11 @@ export default class SearchByTabs extends React.Component {
                 value={currentValue}
                 style={{ marginBottom: 8, borderRadius: "6px" }}>
                 {
-                    this.props.searchBys.map((item => {
-                        return <Radio.Button value={item.value}>{item.display}</Radio.Button>
-                    }))
+                    this.props.searchBys.map((item) =>
+                        <Radio.Button key={item.value} value={item.value}>
+                            {item.display}
+                        </Radio.Button>
+                    )
                 }
             </Radio.Group>
         )

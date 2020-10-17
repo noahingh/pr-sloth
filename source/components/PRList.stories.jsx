@@ -14,12 +14,12 @@ Default.args = {
     perPage: 3,
     pullRequests: [
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add a new component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add a new component.',
         },
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add a new component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add a new component.',
         }
     ],
 };
@@ -31,16 +31,16 @@ Pagination.args = {
     perPage: 3,
     pullRequests: [
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add foo component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add foo component.',
         },
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add bar component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add bar component.',
         },
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add baz component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add baz component.',
         }
     ],
 };

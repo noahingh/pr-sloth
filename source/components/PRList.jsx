@@ -31,8 +31,8 @@ export default class PRList extends React.Component {
                             title={
                                 <div>
                                     <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
-                                    <a style={{ color: "gray" }} href="https://ant.design">{item.fullName}</a>&nbsp;&nbsp;
-                                    <a style={{ color: "black" }} href="https://ant.design">{item.title}</a>
+                                    <a style={{ color: "gray" }} href="https://ant.design">{item.repoFullName}</a>&nbsp;&nbsp;
+                                    <a style={{ color: "black" }} href="https://ant.design">{item.pullRequestTitle}</a>
                                 </div>
                             }
                             // TODO: Change into fields.
@@ -62,8 +62,8 @@ PRList.propTypes = {
      * Array of objects.
      */
     pullRequests: PropTypes.arrayOf(PropTypes.exact({
-        fullName: PropTypes.string,
-        title: PropTypes.string,
+        repoFullName: PropTypes.string,
+        pullRequestTitle: PropTypes.string,
     })),
     /**
      * Function of onChange of pagniation.

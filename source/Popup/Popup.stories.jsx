@@ -33,12 +33,12 @@ Default.args = {
     perPage: 3,
     pullRequests: [
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add a new component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add a new component.',
         },
         {
-            fullName: 'octocat/pr-sloth',
-            title: 'Add a new component.',
+            repoFullName: 'octocat/pr-sloth',
+            pullRequestTitle: 'Add a new component.',
         }
     ],
     onPagination: function () { },
