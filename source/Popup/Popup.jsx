@@ -1,6 +1,7 @@
 import React from 'react';
 // import browser from 'webextension-polyfill';
-import { Row, Col } from 'antd';
+import { Row, Col, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
 import { actions } from '../core/adapters/redux';
@@ -9,6 +10,7 @@ import { connect } from 'react-redux'
 // function openWebPage(url) {
 //   return browser.tabs.create({ url });
 // }
+
 const searchBys = [
   {
     display: 'Created',
@@ -37,10 +39,17 @@ export class Popup extends React.Component {
     return (
       <section style={{ minWidth: '750px', padding: '30px 20px' }}>
         <Row style={{ marginBottom: "5px" }}>
-          <Col>
+          <Col >
             <SearchByTabs
               searchBys={searchBys}
               onSearchByChange={this.props.onSearchByChange}
+            />
+          </Col>
+          <Col offset="1">
+            <Input
+              disabled={true}
+              value={this.props.q}
+              prefix={<SearchOutlined />}
             />
           </Col>
         </Row>

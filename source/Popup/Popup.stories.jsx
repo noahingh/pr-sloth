@@ -9,25 +9,7 @@ const Template = (args) => <Popup {...args} />
 
 export const Default = Template.bind({});
 Default.args = {
-    searchBys: [
-        {
-            display: 'Created',
-            value: 'author',
-        },
-        {
-            display: 'Assigned',
-            value: 'assignee',
-        },
-        {
-            display: 'Mentioned',
-            value: 'mentions',
-        },
-        {
-            display: 'Review requests',
-            value: 'review-requested',
-        },
-    ],
-    onSearchByChange: function () {},
+    q: 'type:pr is:open author:sloth',
     totalCount: 2,
     page: 1,
     perPage: 3,
@@ -41,5 +23,6 @@ Default.args = {
             pullRequestTitle: 'Add a new component.',
         }
     ],
+    onSearchByChange: function () {},
     onPagination: function () { },
 };
