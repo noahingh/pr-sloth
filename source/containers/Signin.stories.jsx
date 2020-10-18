@@ -1,3 +1,5 @@
+// TODO: Fix storybook.
+// https://github.com/storybookjs/storybook/issues/10467
 import React from 'react';
 import { Signin } from './Signin';
 
@@ -11,4 +13,4 @@ const Template = (args) => <Signin {...args} />
 export const Default = Template.bind({});
 Default.args = {
     setToken: (values) => { console.log(values) },
-}
+};

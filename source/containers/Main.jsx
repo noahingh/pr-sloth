@@ -1,11 +1,12 @@
 import React from 'react';
 // import browser from 'webextension-polyfill';
-import { Row, Col, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Row, Col, Input, Button } from 'antd';
+import { SearchOutlined, LogoutOutlined } from '@ant-design/icons';
 import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
 import { actions } from '../core/adapters/redux';
 import { connect } from 'react-redux'
+import * as browser from '../core/adapters/browser';
 
 // function openWebPage(url) {
 //   return browser.tabs.create({ url });
@@ -52,6 +53,13 @@ export class Main extends React.Component {
               prefix={<SearchOutlined />}
             />
           </Col>
+          <Col >
+            &nbsp; 
+            <Button
+              icon={<LogoutOutlined />}
+              onClick={this.props.signout}
+            />
+          </Col>
         </Row>
         <PRList
           totalCount={this.props.totalCount}
@@ -91,6 +99,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(actions.fetchPullRequests(1));
     },
     setPage: (page) => dispatch(actions.fetchPullRequests(page)),
+    signout: () => {
+      browser.storeToken('');
+      dispatch(actions.setToken(''))
+    }
   };
 }
 
