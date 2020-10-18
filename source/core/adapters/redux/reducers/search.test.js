@@ -15,7 +15,7 @@ test('setToken', () => {
   expect(searchReducer(initState, action)).toEqual(expected);
 })
 
-test('login success', () => {
+test('sign-in success', () => {
   const action = {
     type: actions.SIGNIN_SUCCESS,
     token: 'token',
@@ -26,6 +26,19 @@ test('login success', () => {
   expected.token = 'token'
   expected.login = 'login'
   expected.q = 'type:pr is:open author:login '
+
+  expect(searchReducer(initState, action)).toEqual(expected);
+})
+
+test('sign-out success', () => {
+  const action = {
+    type: actions.SIGNOUT_SUCCESS,
+  };
+
+  var expected = {...initState};
+  expected.token = ''
+  expected.login = ''
+  expected.q = 'type:pr is:open author: '
 
   expect(searchReducer(initState, action)).toEqual(expected);
 })

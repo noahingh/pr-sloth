@@ -17,7 +17,9 @@ browser.fetchToken().then((token) => {
     }
 
     // init store
-    store.dispatch(actions.setToken(token))
+    if (token !== '') {
+        store.dispatch(actions.signin(token))
+    }
 })
 
 ReactDOM.render(

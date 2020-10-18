@@ -38,6 +38,13 @@ export function searchReducer(state = initState, action) {
         login,
       };
       break;
+    case actions.SIGNOUT_SUCCESS:
+      state = {
+        ...state,
+        token: '',
+        login: '',
+      };
+      break;
     case actions.SEARCH_BY:
       state = {
         ...state,

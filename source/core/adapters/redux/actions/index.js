@@ -14,6 +14,8 @@ export {
     SIGNIN_SUCCESS,
     SIGNIN_FAILED,
     signin,
+    SIGNOUT_SUCCESS,
+    signout,
     SET_TOKEN,
     setToken,
     SEARCH_BY, 
