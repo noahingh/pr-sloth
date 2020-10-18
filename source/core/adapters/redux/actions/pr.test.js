@@ -17,15 +17,25 @@ test('simple fetch pull-requests', () => {
     items: [
       {
         repository_url: 'https://api.github.com/repos/sloth/pr-sloth',
+        html_url: 'https://api.github.com/repos/sloth/pr-sloth/pulls/1',
         number: 1,
         title: 'Add a new component',
         body: '',
+        user: {
+          login: 'sloth',
+        },
+        created_at: '2020-10-12T20:10:41Z',
       },
       {
         repository_url: 'https://api.github.com/repos/sloth/pr-sloth',
+        html_url: 'https://api.github.com/repos/sloth/pr-sloth/pulls/2',
         number: 2,
         title: 'Fix the bug',
         body: '',
+        user: {
+          login: 'sloth',
+        },
+        created_at: '2020-10-13T20:10:41Z',
       },
     ],
   });
@@ -57,6 +67,9 @@ test('simple fetch pull-requests', () => {
           number: 1,
           title: 'Add a new component',
           body: '',
+          htmlUrl: 'https://api.github.com/repos/sloth/pr-sloth/pulls/1',
+          creator: 'sloth',
+          createdAt: new Date('2020-10-12T20:10:41Z'),
           repo: new Repo({
             owner: 'sloth',
             repo: 'pr-sloth'
@@ -66,6 +79,9 @@ test('simple fetch pull-requests', () => {
           number: 2,
           title: 'Fix the bug',
           body: '',
+          htmlUrl: 'https://api.github.com/repos/sloth/pr-sloth/pulls/2',
+          creator: 'sloth',
+          createdAt: new Date('2020-10-13T20:10:41Z'),
           repo: new Repo({
             owner: 'sloth',
             repo: 'pr-sloth'

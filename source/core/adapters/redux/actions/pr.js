@@ -44,13 +44,19 @@ function receivePullRequestsFailed(e) {
 }
 
 function convertPullRequestDTO(data) {
-  const {number, title, body, repository_url} = data;
+  const {number, title, body, html_url, user, created_at, repository_url} = data;
+  const { login } = user;
   const {owner, repo} = parseRepositoryUrl(repository_url);
+  const htmlUrl = html_url;
+  const createdAt = new Date(created_at);
 
   return new PullRequest({
     number,
     title,
     body,
+    htmlUrl,
+    creator: login,
+    createdAt,
     repo: new Repo({
       owner,
       repo,

@@ -3,12 +3,18 @@ export default class PullRequest {
     number,
     title,
     body,
+    htmlUrl,
+    creator,
+    createdAt,
     repo,
   }) {
     this.number = number;
     this.title = title;
     this.body = body;
-    this.repo = repo
+    this.htmlUrl = htmlUrl;
+    this.creator = creator;
+    this.createdAt = createdAt;
+    this.repo = repo;
   }
 
   get prNumber() {
