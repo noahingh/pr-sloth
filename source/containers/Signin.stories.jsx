@@ -12,5 +12,5 @@ const Template = (args) => <Signin {...args} />
 
 export const Default = Template.bind({});
 Default.args = {
-    setToken: (values) => { console.log(values) },
+    signin: (values) => { console.log(values) },
 };

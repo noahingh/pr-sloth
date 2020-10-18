@@ -24,12 +24,6 @@ export const initState = {
 
 export function searchReducer(state = initState, action) {
   switch (action.type) {
-    case actions.SET_TOKEN:
-      state = {
-        ...state,
-        token: action.token,
-      };
-      break;
     case actions.SIGNIN_SUCCESS:
       const {token, login} = action;
       state = {

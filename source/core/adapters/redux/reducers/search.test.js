@@ -2,18 +2,6 @@ import * as actions from '../actions'
 
 import {initState, searchReducer} from './search'
 
-test('setToken', () => {
-  const action = {
-    type: actions.SET_TOKEN,
-    token: 'token',
-  };
-
-  var expected = {...initState};
-  expected.token = 'token'
-  expected.q = 'type:pr is:open author: '
-
-  expect(searchReducer(initState, action)).toEqual(expected);
-})
 
 test('sign-in success', () => {
   const action = {

@@ -23,7 +23,7 @@ export class Signin extends React.Component {
                     <Form
                         name="signin"
                         validateTrigger="onSubmit"
-                        onFinish={this.props.setToken}
+                        onFinish={this.props.signin}
                     >
                         <Form.Item
                             label="Github Token"
@@ -57,10 +57,10 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setToken: (values) => {
+        signin: (values) => {
             const { token } = values;
             browser.storeToken(token);
-            dispatch(actions.setToken(token))
+            dispatch(actions.signin(token))
         },
     }
 }

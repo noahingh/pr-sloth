@@ -1,17 +1,9 @@
 import {Octokit} from '@octokit/rest';
 
-export const SET_TOKEN = 'SET_TOKEN';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_FAILED = 'SIGNIN_FAILED';
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
 export const SEARCH_BY = 'SEARCH_BY';
-
-export function setToken(token) {
-  return {
-    type: SET_TOKEN,
-    token,
-  };
-}
 
 function signinSuccess({token, login}) {
   return {

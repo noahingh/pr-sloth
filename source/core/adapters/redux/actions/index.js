@@ -16,8 +16,6 @@ export {
     signin,
     SIGNOUT_SUCCESS,
     signout,
-    SET_TOKEN,
-    setToken,
     SEARCH_BY, 
     setSearchBy, 
     searchByAuthor, 

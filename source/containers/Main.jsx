@@ -101,7 +101,7 @@ function mapDispatchToProps(dispatch) {
     setPage: (page) => dispatch(actions.fetchPullRequests(page)),
     signout: () => {
       browser.storeToken('');
-      dispatch(actions.setToken(''))
+      dispatch(actions.signout())
     }
   };
 }
