@@ -10,10 +10,13 @@ test('sign-in success', () => {
     login: 'login',
   };
 
-  var expected = {...initState};
-  expected.token = 'token'
-  expected.login = 'login'
-  expected.q = 'type:pr is:open author:login '
+  var expected = {
+    ...initState,
+    signinStatus: actions.SIGNIN_SUCCESS,
+    token: 'token',
+    login:  'login',
+    q: 'type:pr is:open author:login ',
+  };
 
   expect(searchReducer(initState, action)).toEqual(expected);
 })

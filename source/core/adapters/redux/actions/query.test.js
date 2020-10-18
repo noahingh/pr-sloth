@@ -1,7 +1,7 @@
 import nock from 'nock'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import {SIGNIN_SUCCESS, signin, SIGNIN_FAILED} from './query'
+import {SIGNIN_LOADING, SIGNIN_SUCCESS, signin, SIGNIN_FAILED} from './query'
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -16,6 +16,9 @@ test('login success', () => {
     search: { token: '', login: '' },
   });
   const expectedActions = [
+    {
+      type: SIGNIN_LOADING,
+    },
     {
       type: SIGNIN_SUCCESS,
       token: 'token',
@@ -37,6 +40,9 @@ test('login failed', () => {
     search: { token: '', login: '' },
   });
   const expectedActions = [
+    {
+      type: SIGNIN_LOADING,
+    },
     {
       type: SIGNIN_FAILED,
       e: new Error("Bad credentials"),
