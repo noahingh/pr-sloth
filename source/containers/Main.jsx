@@ -31,6 +31,7 @@ const searchBys = [
   },
 ];
 
+
 export class Main extends React.Component {
   componentDidMount() {
     this.props.setPage(1);

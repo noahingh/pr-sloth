@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Octokit } from '@octokit/rest'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Spin } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { actions } from '../core/adapters/redux';
 import * as browser from '../core/adapters/browser';
@@ -19,40 +19,50 @@ export class Signin extends React.Component {
                     <GithubOutlined style={{ fontSize: '60px', color: 'black' }} />
                     <h1>Sign in to GitHub</h1>
                 </div>
-                <div>
-                    <Form
-                        name="signin"
-                        validateTrigger="onSubmit"
-                        onFinish={this.props.signin}
-                    >
-                        <Form.Item
-                            label="Github Token"
-                            name="token"
-                            rules={[
-                                { required: true, message: 'Please input your Github token!' },
-                                {
-                                    validator: async (_, token) => {
-                                        await this.validateToken(token);
-                                    }
-                                },
-                            ]}
+                <div style={{ textAlign: 'center' }}>
+                    {this.props.signinStatus === actions.SIGNIN_LOADING ?
+                        <Spin tip="Signing in..." />
+                        :
+                        < Form
+                            name="signin"
+                            validateTrigger="onSubmit"
+                            onFinish={this.props.signin}
                         >
-                            <Input.Password />
-                        </Form.Item>
-                        <Form.Item >
-                            <Button type="primary" htmlType="submit">
-                                Sign in
+                            <Form.Item
+                                label="Github Token"
+                                name="token"
+                                rules={[
+                                    { required: true, message: 'Please input your Github token!' },
+                                    {
+                                        validator: async (_, token) => {
+                                            await this.validateToken(token);
+                                        }
+                                    },
+                                ]}
+                            >
+                                <Input.Password />
+                            </Form.Item>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit" style={{ width: '330px' }}>
+                                    Sign in
                             </Button>
-                        </Form.Item>
-                    </Form>
+                            </Form.Item>
+                        </Form>
+
+
+                    }
                 </div>
             </section >
         )
     }
 }
 
-function mapStateToProps() {
-    return {}
+function mapStateToProps(state) {
+    const { search } = state;
+    const { signinStatus } = search;
+    return {
+        signinStatus,
+    };
 }
 
 function mapDispatchToProps(dispatch) {

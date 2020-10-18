@@ -1,6 +1,10 @@
 import * as actions from '../actions'
 
 export const initState = {
+  signinStatus: '',
+  /**
+   * Github token.
+   */
   token: '',
   /**
    * Login of user.
@@ -24,10 +28,17 @@ export const initState = {
 
 export function searchReducer(state = initState, action) {
   switch (action.type) {
+    case actions.SIGNIN_LOADING:
+      state = {
+        ...state,
+        signinStatus: actions.SIGNIN_LOADING,
+      };
+      break;
     case actions.SIGNIN_SUCCESS:
       const {token, login} = action;
       state = {
         ...state,
+        signinStatus: actions.SIGNIN_SUCCESS,
         token,
         login,
       };

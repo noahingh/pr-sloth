@@ -5,6 +5,7 @@ export default {
     title: 'Views/Main',
     component: Main,
 }
+
 const Template = (args) => <Main {...args} />
 
 export const Default = Template.bind({});

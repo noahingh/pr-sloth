@@ -1,9 +1,16 @@
 import {Octokit} from '@octokit/rest';
 
+export const SIGNIN_LOADING = 'SIGNIN_LOADING';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_FAILED = 'SIGNIN_FAILED';
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
 export const SEARCH_BY = 'SEARCH_BY';
+
+function signinLoading() {
+  return {
+    type: SIGNIN_LOADING,
+  };
+}
 
 function signinSuccess({token, login}) {
   return {
@@ -22,6 +29,8 @@ function signinFailed(e) {
 
 export function signin(token) {
   return async (dispatch) => {
+    dispatch(signinLoading());
+
     const octokit = new Octokit({auth: token});
 
     try {
