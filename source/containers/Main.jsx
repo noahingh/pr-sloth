@@ -1,5 +1,4 @@
 import React from 'react';
-// import browser from 'webextension-polyfill';
 import { Row, Col, Input, Button } from 'antd';
 import { SearchOutlined, LogoutOutlined } from '@ant-design/icons';
 import PRList from '../components/PRList';
@@ -54,7 +53,7 @@ export class Main extends React.Component {
             />
           </Col>
           <Col >
-            &nbsp; 
+            &nbsp;
             <Button
               icon={<LogoutOutlined />}
               onClick={this.props.signout}
@@ -85,8 +84,13 @@ function mapStateToProps(state) {
     perPage,
     pullRequests: pullRequests.map(pr => {
       return {
+        number: pr.number,
+        title: pr.title,
+        htmlUrl: pr.htmlUrl,
+        creator: pr.creator,
+        createdAt: pr.createdAt,
         repoFullName: pr.repo.fullName,
-        pullRequestTitle: pr.title,
+        repoHtmlUrl: pr.repo.htmlUrl,
       }
     })
   };

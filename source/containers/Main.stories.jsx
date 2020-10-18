@@ -16,14 +16,20 @@ Default.args = {
     perPage: 3,
     pullRequests: [
         {
+            number: 10,
+            title: 'Add a foo component.',
+            creator: 'sloth',
+            createdAt: new Date('2020-09-12T20:10:41Z'),
             repoFullName: 'octocat/pr-sloth',
-            pullRequestTitle: 'Add a new component.',
         },
         {
+            number: 12,
+            title: 'Add a bar component.',
+            creator: 'sloth',
+            createdAt: new Date('2020-10-13T20:10:41Z'),
             repoFullName: 'octocat/pr-sloth',
-            pullRequestTitle: 'Add a new component.',
         }
     ],
     setSearchBy: function () { },
-    setPage: function () {},
+    setPage: function () { },
 };

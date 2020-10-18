@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Row, Col } from 'antd';
+import { List, Row, Col, Button } from 'antd';
 import { PullRequestOutlined } from '@ant-design/icons';
+import browser from 'webextension-polyfill';
+import moment from 'moment'
 
 export default class PRList extends React.Component {
+    openWebPage(url) {
+        browser.tabs.create({ url });
+    }
+
+    getFromNow(date) {
+        return moment(date).fromNow();
+    }
+
     render() {
         const header =
             <Row>
@@ -31,12 +41,25 @@ export default class PRList extends React.Component {
                             title={
                                 <div>
                                     <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
-                                    <a style={{ color: "gray" }} href="https://ant.design">{item.repoFullName}</a>&nbsp;&nbsp;
-                                    <a style={{ color: "black" }} href="https://ant.design">{item.pullRequestTitle}</a>
+                                    <Button
+                                        style={{ color: 'gray', padding: '4px 1px' }}
+                                        type="link"
+                                        onClick={() => { this.openWebPage(item.repoHtmlUrl) }}
+                                    >
+                                        {item.repoFullName}
+                                    </Button>
+                                    <Button
+                                        style={{ color: 'black' }}
+                                        type="link"
+                                        onClick={() => { this.openWebPage(item.htmlUrl) }}
+                                    >
+                                        {item.title}
+                                    </Button>
                                 </div>
                             }
-                            // TODO: Change into fields.
-                            description={<p>#3962 opened 27 days ago by ....</p>}
+                            description={
+                                '#' + item.number.toString() + ' opened ' + this.getFromNow(item.createdAt) + ' by ' + item.creator + '.'
+                            }
                         />
                     </List.Item>
                 )}
@@ -62,8 +85,15 @@ PRList.propTypes = {
      * Array of objects.
      */
     pullRequests: PropTypes.arrayOf(PropTypes.exact({
+        // pull request.
+        number: PropTypes.number,
+        title: PropTypes.string,
+        htmlUrl: PropTypes.string,
+        creator: PropTypes.string,
+        createdAt: PropTypes.object,
+        // repository.
         repoFullName: PropTypes.string,
-        pullRequestTitle: PropTypes.string,
+        repoHtmlUrl: PropTypes.string,
     })),
     /**
      * Function of onChange of pagniation.
