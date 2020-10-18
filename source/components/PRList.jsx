@@ -7,7 +7,7 @@ import moment from 'moment'
 
 export default class PRList extends React.Component {
     openWebPage(url) {
-        browser.tabs.create({ url });
+        browser.tabs.create({ url, active: false });
     }
 
     getFromNow(date) {
