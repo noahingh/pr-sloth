@@ -11,6 +11,9 @@ export {
 } from './pr'
 
 export {
+    SIGNIN_SUCCESS,
+    SIGNIN_FAILED,
+    signin,
     SET_TOKEN,
     setToken,
     SEARCH_BY, 

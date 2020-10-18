@@ -7,7 +7,7 @@ export const initState = {
    *
    * TODO: complete fetchUser.
    */
-  login: 'hanjunlee',
+  login: '',
   /**
    * Bool of pr opened.
    */
@@ -28,7 +28,15 @@ export function searchReducer(state = initState, action) {
       state = {
         ...state,
         token: action.token,
-      }
+      };
+      break;
+    case actions.SIGNIN_SUCCESS:
+      const {token, login} = action;
+      state = {
+        ...state,
+        token,
+        login,
+      };
       break;
     case actions.SEARCH_BY:
       state = {
