@@ -11,7 +11,7 @@ import 'antd/dist/antd.css';
 
 const store = configureStore();
 
-browser.fetchToken().then((token) => {
+browser.retrieveTokenLogin().then(({token, login}) => {
     if (token === undefined) {
         token = '';
     }

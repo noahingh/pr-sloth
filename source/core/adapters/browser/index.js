@@ -1,4 +1,4 @@
 export {
-    fetchToken,
-    storeToken,
+    retrieveTokenLogin,
+    cacheTokenLogin,
 } from './storage'

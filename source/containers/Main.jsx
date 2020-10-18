@@ -6,7 +6,6 @@ import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
 import { actions } from '../core/adapters/redux';
 import { connect } from 'react-redux'
-import * as browser from '../core/adapters/browser';
 
 // function openWebPage(url) {
 //   return browser.tabs.create({ url });
@@ -101,7 +100,6 @@ function mapDispatchToProps(dispatch) {
     },
     setPage: (page) => dispatch(actions.fetchPullRequests(page)),
     signout: () => {
-      browser.storeToken('');
       dispatch(actions.signout())
     }
   };

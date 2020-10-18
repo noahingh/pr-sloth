@@ -4,7 +4,6 @@ import { Octokit } from '@octokit/rest'
 import { Form, Input, Button, Spin } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { actions } from '../core/adapters/redux';
-import * as browser from '../core/adapters/browser';
 
 export class Signin extends React.Component {
     async validateToken(token) {
@@ -69,7 +68,6 @@ function mapDispatchToProps(dispatch) {
     return {
         signin: (values) => {
             const { token } = values;
-            browser.storeToken(token);
             dispatch(actions.signin(token))
         },
     }
