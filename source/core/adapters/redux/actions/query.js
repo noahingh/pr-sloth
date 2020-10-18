@@ -46,6 +46,10 @@ export function signin(token) {
   }
 }
 
+export function signinCache({token, login}) {
+  return signinSuccess({token, login});
+}
+
 export function signout() {
   return {
     type: SIGNOUT_SUCCESS,

@@ -11,14 +11,14 @@ import 'antd/dist/antd.css';
 
 const store = configureStore();
 
-browser.retrieveTokenLogin().then(({token, login}) => {
+browser.retrieveTokenLogin().then(({ token, login }) => {
     if (token === undefined) {
         token = '';
     }
 
     // init store
     if (token !== '') {
-        store.dispatch(actions.signin(token))
+        store.dispatch(actions.signinCache({ token, login }));
     }
 })
 

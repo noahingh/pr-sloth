@@ -18,39 +18,41 @@ export class Signin extends React.Component {
                     <GithubOutlined style={{ fontSize: '60px', color: 'black' }} />
                     <h1>Sign in to GitHub</h1>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                    {this.props.signinStatus === actions.SIGNIN_LOADING ?
+                {this.props.signinStatus === actions.SIGNIN_LOADING ?
+                    <div style={{ textAlign: 'center' }}>
                         <Spin tip="Signing in..." />
-                        :
-                        < Form
-                            name="signin"
-                            validateTrigger="onSubmit"
-                            onFinish={this.props.signin}
+                    </div>
+                    :
+                    <div >
+                    < Form
+                        name="signin"
+                        validateTrigger="onSubmit"
+                        onFinish={this.props.signin}
+                    >
+                        <Form.Item
+                            label="Github Token"
+                            name="token"
+                            rules={[
+                                { required: true, message: 'Please input your Github token!' },
+                                {
+                                    validator: async (_, token) => {
+                                        await this.validateToken(token);
+                                    }
+                                },
+                            ]}
                         >
-                            <Form.Item
-                                label="Github Token"
-                                name="token"
-                                rules={[
-                                    { required: true, message: 'Please input your Github token!' },
-                                    {
-                                        validator: async (_, token) => {
-                                            await this.validateToken(token);
-                                        }
-                                    },
-                                ]}
-                            >
-                                <Input.Password />
-                            </Form.Item>
-                            <Form.Item >
-                                <Button type="primary" htmlType="submit" style={{ width: '330px' }}>
-                                    Sign in
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item >
+                            <Button type="primary" htmlType="submit" style={{ width: '330px' }}>
+                                Sign in
                             </Button>
-                            </Form.Item>
-                        </Form>
+                        </Form.Item>
+                    </Form>
+                    </div>
 
 
-                    }
-                </div>
+                }
             </section >
         )
     }

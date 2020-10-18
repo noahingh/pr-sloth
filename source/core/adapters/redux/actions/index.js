@@ -15,6 +15,7 @@ export {
     SIGNIN_SUCCESS,
     SIGNIN_FAILED,
     signin,
+    signinCache,
     SIGNOUT_SUCCESS,
     signout,
     SEARCH_BY, 
