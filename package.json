@@ -1,6 +1,6 @@
 {
   "name": "web-extension-starter",
-  "version": "3.0.0",
+  "version": "0.1.0",
   "description": "Web extension starter using react and javascript",
   "private": true,
   "repository": "https://github.com/abhijithvijayan/web-extension-starter.git",
