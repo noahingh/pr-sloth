@@ -62,7 +62,10 @@
   },
 
   "content_scripts": [{
-    "matches": [],
+    "matches": [
+      "http://github.com/*",
+      "https://github.com/*"
+    ],
     "js": [
       "js/contentScript.bundle.js"
     ]
