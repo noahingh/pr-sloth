@@ -15,9 +15,7 @@
 
   "permissions": [
     "activeTab",
-    "storage",
-    "http://*/*",
-    "https://*/*"
+    "storage"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
@@ -64,10 +62,7 @@
   },
 
   "content_scripts": [{
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
+    "matches": [],
     "js": [
       "js/contentScript.bundle.js"
     ]
