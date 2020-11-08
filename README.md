@@ -23,4 +23,4 @@ Move to Settings > Developer settings > [Personal access tokens](https://github.
 
 ## Changelog
 
-
+[Changelog](./docs/CHANGELOG)
