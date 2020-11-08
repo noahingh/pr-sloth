@@ -13,15 +13,10 @@ It is the browser extension to explore your Github pull-request more efficiently
 - [Chrome](https://chrome.google.com/webstore/detail/github-pr-sloth/onacocikpankmlhfmflpaeeholbhflbh)
 
 2. Generate Github token:
-Move to Settings > Developer settings > [Personal access tokens](https://github.com/settings/tokens/new) in Github, and generate a new token like the following:
+Move to Settings > Developer settings > [Personal access tokens](https://github.com/settings/tokens/new) in Github, and generate a new token with the `repo` permission.
 
-![generate](./docs/generate.png)
-
-3. Sign-in with Github token:
-
-![sign-in](./docs/sign-in.png)
-
+3. Sign-in with the Github token.
 
 ## License
 
-## CHANGELOGS
+## Changelogs
