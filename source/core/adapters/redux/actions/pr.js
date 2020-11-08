@@ -7,6 +7,7 @@ export const SET_PAGE = 'SET_PAGE'
 export const SET_PER_PAGE = 'SET_PER_PAGE'
 export const RECEIVE_PULL_REQUESTS_SUCCESS = 'RECEIVE_PULL_REQUESTS_SUCCESS'
 export const RECEIVE_PULL_REQUESTS_FAILED = 'RECEIVE_PULL_REQUESTS_FAILED'
+export const PER_PAGE = 3
 
 export function setTotalCount(count) {
   return {
@@ -29,10 +30,18 @@ export function setPerPage(perPage) {
   }
 }
 
-function receivePullRequestsSuccess(prs) {
+function receivePullRequestsSuccess({
+  totalCount,
+  page,
+  perPage,
+  pullRequests,
+}) {
   return {
     type: RECEIVE_PULL_REQUESTS_SUCCESS,
-    pullRequests: prs,
+    totalCount,
+    page,
+    perPage,
+    pullRequests,
   };
 }
 
@@ -73,7 +82,7 @@ export function fetchPullRequests(page) {
       const {data} = await octokit.search.issuesAndPullRequests({
         q,
         page,
-        per_page: 3,
+        per_page: PER_PAGE,
       });
 
       // Dispatch total count.
@@ -87,8 +96,12 @@ export function fetchPullRequests(page) {
         return pullRequest
       })) 
 
-      // Dispatch pull requests.
-      return dispatch(receivePullRequestsSuccess(pullRequests));
+      return dispatch(receivePullRequestsSuccess({
+        totalCount: data.total_count,
+        page: page,
+        perPage: PER_PAGE,
+        pullRequests,
+      }));
     } catch (e) {
       return dispatch(receivePullRequestsFailed(e))
     }

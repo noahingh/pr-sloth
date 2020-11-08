@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import PullRequest from '../../../models/PullRequest'
 import Repo from '../../../models/Repo'
 
-import {fetchPullRequests, RECEIVE_PULL_REQUESTS_SUCCESS, SET_TOTAL_COUNT, SET_PAGE, SET_PER_PAGE} from './pr'
+import {fetchPullRequests, RECEIVE_PULL_REQUESTS_SUCCESS, SET_TOTAL_COUNT, SET_PAGE, SET_PER_PAGE, PER_PAGE} from './pr'
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -62,6 +62,9 @@ test('simple fetch pull-requests', () => {
     },
     {
       type: RECEIVE_PULL_REQUESTS_SUCCESS,
+      totalCount: 2,
+      page: 1,
+      perPage: PER_PAGE,
       pullRequests: [
         new PullRequest({
           number: 1,

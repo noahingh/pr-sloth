@@ -22,10 +22,9 @@ export const initState = {
 export function listReducer(state = initState, action) {
   switch (action.type) {
     case actions.SET_TOTAL_COUNT:
-      const totalCount = action.totalCount
       return {
         ...state,
-        totalCount,
+        totalCount: action.totalCount,
       };
     case actions.SET_PAGE:
       return {
@@ -38,9 +37,12 @@ export function listReducer(state = initState, action) {
         perPage: action.perPage,
       };
     case actions.RECEIVE_PULL_REQUESTS_SUCCESS:
-      const pullRequests = action.pullRequests
+      const { totalCount, page, perPage, pullRequests } = action
       return {
         ...state,
+        totalCount,
+        page,
+        perPage,
         pullRequests,
       };
     default:
