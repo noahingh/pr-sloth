@@ -19,4 +19,8 @@ Move to Settings > Developer settings > [Personal access tokens](https://github.
 
 ## License
 
-## Changelogs
+[MIT License](./docs/LICENSE)
+
+## Changelog
+
+
