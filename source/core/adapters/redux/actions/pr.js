@@ -85,11 +85,6 @@ export function fetchPullRequests(page) {
         per_page: PER_PAGE,
       });
 
-      // Dispatch total count.
-      dispatch(setTotalCount(data.total_count));
-      dispatch(setPage(page));
-      dispatch(setPerPage(3));
-
       // pull requests
       const pullRequests = await Promise.all(data.items.map(async item => {
         var pullRequest = convertPullRequestDTO(item);
