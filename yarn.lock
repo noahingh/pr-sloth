@@ -9032,6 +9032,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -11741,6 +11746,14 @@ react-syntax-highlighter@^12.2.1:
     lowlight "1.12.1"
     prismjs "^1.8.4"
     refractor "^2.4.1"
+
+react-text-ellipsis@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-text-ellipsis/-/react-text-ellipsis-1.6.0.tgz#a780726be5ca8b9588243cc889eb17d2ffb7dc82"
+  integrity sha512-ibsX0RAfn3YyquxN71sQz/Rrd2kpF2/qKF5qM2KGMxggkW4Wgtra5OquI+4eo7yosm7mwQgaGtzB+TQM9hPxEw==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    prop-types "^15.6.1"
 
 react-textarea-autosize@^8.1.1:
   version "8.2.0"
