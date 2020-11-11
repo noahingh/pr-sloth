@@ -25,22 +25,18 @@ export default class PRPopover extends React.Component {
 class PRContent extends React.Component {
     render() {
         return (
-            <div style={{width: '350px'}}>
-                <Row>
-                    <Col offset={2}>
-                        <div>                               
-                            <b>{this.props.title}</b> <span style={{color: 'gray'}}>#{this.props.number}</span>
-                        </div>
-                        <TextEllipsis
-                            lines={3}
-                            tag={'p'}
-                            ellipsisChars={'...'}
-                            style={{color: 'gray'}}
-                        >
-                            <span style={{color: 'gray'}}>{this.props.description}</span>
-                        </TextEllipsis>
-                    </Col>
-                </Row>
+            <div style={{ width: '350px', padding: '10px' }}>
+                <div>
+                    <b>{this.props.title}</b> <span style={{ color: 'gray' }}>#{this.props.number}</span>
+                </div>
+                <TextEllipsis
+                    lines={3}
+                    tag={'p'}
+                    ellipsisChars={'...'}
+                    style={{ color: 'gray' }}
+                >
+                    <span style={{ color: 'gray' }}>{this.props.description}</span>
+                </TextEllipsis>
             </div>
         );
     }
