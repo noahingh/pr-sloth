@@ -86,6 +86,7 @@ function mapStateToProps(state) {
       return {
         number: pr.number,
         title: pr.title,
+        body: pr.body,
         htmlUrl: pr.htmlUrl,
         creator: pr.creator,
         createdAt: pr.createdAt,

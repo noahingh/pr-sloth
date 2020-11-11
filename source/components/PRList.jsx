@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { List, Row, Col, Button } from 'antd';
 import { PullRequestOutlined } from '@ant-design/icons';
 import browser from 'webextension-polyfill';
-import moment from 'moment'
+import moment from 'moment';
+import PRPopover from './PRPopover';
 
 export default class PRList extends React.Component {
     openWebPage(url) {
@@ -36,6 +37,7 @@ export default class PRList extends React.Component {
                 }}
                 dataSource={this.props.pullRequests}
                 renderItem={item => (
+                    // TODO: make a new component to separate codes.
                     <List.Item>
                         <List.Item.Meta
                             title={
@@ -48,13 +50,19 @@ export default class PRList extends React.Component {
                                     >
                                         {item.repoFullName}
                                     </Button>
-                                    <Button
-                                        style={{ color: 'black' }}
-                                        type="link"
-                                        onClick={() => { this.openWebPage(item.htmlUrl) }}
+                                    <PRPopover
+                                        title={item.title}
+                                        number={item.number}
+                                        description={item.body}
                                     >
-                                        {item.title}
-                                    </Button>
+                                        <Button
+                                            style={{ color: 'black' }}
+                                            type="link"
+                                            onClick={() => { this.openWebPage(item.htmlUrl) }}
+                                        >
+                                            {item.title}
+                                        </Button>
+                                    </PRPopover>
                                 </div>
                             }
                             description={
@@ -88,6 +96,7 @@ PRList.propTypes = {
         // pull request.
         number: PropTypes.number,
         title: PropTypes.string,
+        body: PropTypes.string,
         htmlUrl: PropTypes.string,
         creator: PropTypes.string,
         createdAt: PropTypes.instanceOf(Date),
