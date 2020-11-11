@@ -90,7 +90,7 @@ PRList.propTypes = {
         title: PropTypes.string,
         htmlUrl: PropTypes.string,
         creator: PropTypes.string,
-        createdAt: PropTypes.object,
+        createdAt: PropTypes.instanceOf(Date),
         // repository.
         repoFullName: PropTypes.string,
         repoHtmlUrl: PropTypes.string,
