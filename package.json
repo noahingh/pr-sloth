@@ -1,6 +1,6 @@
 {
   "name": "pr-sloth",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Github pull request browser extension.",
   "private": true,
   "repository": "https://github.com/hanjunlee/pr-sloth.git",

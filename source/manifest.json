@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Github PR Sloth",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
   "icons": {
     "16": "assets/icons/favicon-16.png",
@@ -10,7 +10,7 @@
     "128": "assets/icons/favicon-128.png"
   },
   "description": "Explore Github pull-requests by the extension.",
-  "homepage_url": "https://google.com/",
+  "homepage_url": "https://github.com/hanjunlee/pr-sloth",
   "short_name": "PR Sloth",
 
   "permissions": [
