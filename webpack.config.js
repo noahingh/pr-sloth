@@ -70,7 +70,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
       'webextension-polyfill': path.resolve(
         path.join(__dirname, 'node_modules', 'webextension-polyfill')
