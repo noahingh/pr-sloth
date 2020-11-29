@@ -26,6 +26,7 @@
       },
       "jest"
     ],
+    "@babel/typescript",
     "@babel/react"
   ],
   "plugins": [
