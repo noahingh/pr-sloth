@@ -1,3 +1,3 @@
-export * as actions from './actions'
-export * as reducers from './reducers'
+export * as signin from './signin'
+export * as pulls from './pulls'
 export {configureStore} from './store'

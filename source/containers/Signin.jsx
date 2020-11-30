@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Octokit } from '@octokit/rest'
 import { Form, Input, Button, Spin } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
-import { actions } from '../core/adapters/redux';
+import { signin } from '../core/adapters/redux';
+
+const { types, actions } = signin;
 
 export class Signin extends React.Component {
     async validateToken(token) {
@@ -18,7 +20,7 @@ export class Signin extends React.Component {
                     <GithubOutlined style={{ fontSize: '60px', color: 'black' }} />
                     <h1>Sign in to GitHub</h1>
                 </div>
-                {this.props.signinStatus === actions.SIGNIN_LOADING ?
+                {this.props.signinStatus === types.SIGNIN_LOADING ?
                     <div style={{ textAlign: 'center' }}>
                         <Spin tip="Signing in..." />
                     </div>
