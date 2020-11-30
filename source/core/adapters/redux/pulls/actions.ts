@@ -8,7 +8,7 @@ import {
     PullsAction
 } from './types';
 
-export function setPage(page): PullsAction {
+export function setPage(page: number): PullsAction {
     return {
         type: SET_PAGE,
         page
@@ -98,7 +98,7 @@ export function fetchPullRequests(): AppThunk {
 
             const items = await Promise.all(data.items.map(async item => convertPullRequestData(item)));
 
-            return dispatch(fetchPullRequestsSuccess({
+            dispatch(fetchPullRequestsSuccess({
                 total: data.total_count,
                 page,
                 perPage,
