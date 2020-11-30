@@ -20,7 +20,7 @@ export class Signin extends React.Component {
                     <GithubOutlined style={{ fontSize: '60px', color: 'black' }} />
                     <h1>Sign in to GitHub</h1>
                 </div>
-                {this.props.signinStatus === types.SIGNIN_LOADING ?
+                {this.props.type === types.SIGNIN_LOADING ?
                     <div style={{ textAlign: 'center' }}>
                         <Spin tip="Signing in..." />
                     </div>
@@ -61,10 +61,9 @@ export class Signin extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { search } = state;
-    const { signinStatus } = search;
+    const { type } = state.signin;
     return {
-        signinStatus,
+        type,
     };
 }
 

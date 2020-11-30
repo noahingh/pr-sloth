@@ -15,8 +15,8 @@ export class Popup extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { search } = state;
-    const { token, login } = search;
+    const { signin } = state;
+    const { token, login } = signin;
 
     // every time caching token and login.
     browser.cacheTokenLogin({token, login});
