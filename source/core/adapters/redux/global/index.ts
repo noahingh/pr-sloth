@@ -1,2 +1,3 @@
-export { RootState, SigninState }  from './state';
-export { AppThunk } from './thunk';
+export type { RootState, SigninState } from './state';
+export type { AppThunk } from './thunk';
+export { PullRequest } from './models';
