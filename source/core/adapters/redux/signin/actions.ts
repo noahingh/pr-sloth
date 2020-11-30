@@ -25,7 +25,7 @@ function signinSuccess(creds: {
 }
 
 export function signin(token: string): AppThunk {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         dispatch(signinLoading());
 
         const octokit = new Octokit({auth: token});
