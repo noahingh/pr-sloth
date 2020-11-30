@@ -15,7 +15,7 @@ export interface PullsState {
     list: PullsListState;
 }
 
-interface PullsListState {
+export interface PullsListState {
     type: string;
     total: number;
     page: number;
