@@ -1,5 +1,5 @@
 import { SigninState } from '../global';
-import { SIGNIN_LOADING, SIGNIN_SUCCESS, SigninAction } from './types';
+import { SIGNIN_LOADING, SIGNIN_SUCCESS, SIGNOUT_SUCCESS, SigninAction } from './types';
 
 const initState: SigninState = {
     type: '',
@@ -33,6 +33,13 @@ export function signinReducer(
                 login,
                 token
             };
+        case SIGNOUT_SUCCESS:
+            return {
+                ...state,
+                type,
+                login: '',
+                token: '',
+            }
         default:
             return state
     }

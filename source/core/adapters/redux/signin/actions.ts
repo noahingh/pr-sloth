@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
 
 import { AppThunk } from '../global';
-import { SIGNIN_LOADING, SIGNIN_SUCCESS, SigninAction } from './types';
+import { SIGNIN_LOADING, SIGNIN_SUCCESS, SIGNOUT_SUCCESS, SigninAction } from './types';
 
 function signinLoading(): SigninAction {
     return {
@@ -52,4 +52,10 @@ export function setSignin(cred: {
 
         dispatch(signinSuccess({ login, token }));
     }
+}
+
+export function signout(): SigninAction {
+    return {
+        type: SIGNOUT_SUCCESS
+    };
 }
