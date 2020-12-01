@@ -4,10 +4,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '../core/adapters/redux';
 import Popup from './Popup';
-import { actions } from '../core/adapters/redux';
+import { signin } from '../core/adapters/redux';
 import * as browser from '../core/adapters/browser';
 
 import 'antd/dist/antd.css';
+
+const { actions } = signin;
 
 const store = configureStore();
 
@@ -18,7 +20,7 @@ browser.retrieveTokenLogin().then(({ token, login }) => {
 
     // init store
     if (token !== '') {
-        store.dispatch(actions.signinCache({ token, login }));
+        store.dispatch(actions.setSignin({ token, login }));
     }
 })
 
