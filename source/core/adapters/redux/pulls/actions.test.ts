@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { PullRequest } from '../global';
 // import Repo from '../../../models/Repo';
 
-import { FETCH_PULL_REQUESTS_LOADING, FETCH_PULL_REQUESTS_SUCCESS, SET_PAGE } from './types';
+import { FETCH_PULL_REQUESTS_LOADING, FETCH_PULL_REQUESTS_SUCCESS } from './types';
 import { fetchPullRequests } from './actions';
 
 const middlewares = [thunk];
@@ -13,7 +13,7 @@ const mockStore = configureMockStore(middlewares);
 
 test('simple fetch pull-requests', () => {
     // Mock Github API.
-    nock('https://api.github.com').get('/search/issues?q=type:pr is:open author:hanjunlee&page=1&per_page=3').reply(200, {
+    nock('https://api.github.com').get('/search/issues?q=&page=1&per_page=3').reply(200, {
         total_count: 2,
         items: [
             {
@@ -50,7 +50,10 @@ test('simple fetch pull-requests', () => {
                 page: 1,
                 perPage: 3,
             },
-        }
+            query: {
+                q: '',
+            },
+        },
     });
     const expectedActions = [
         {
@@ -82,6 +85,6 @@ test('simple fetch pull-requests', () => {
         },
     ];
 
-    return store.dispatch(fetchPullRequests())
+    return store.dispatch<any>(fetchPullRequests())
         .then(() => { expect(store.getActions()).toEqual(expectedActions) })
 })

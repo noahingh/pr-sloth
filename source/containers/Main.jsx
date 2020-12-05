@@ -1,38 +1,37 @@
 import React from 'react';
 import { Row, Col, Input, Button } from 'antd';
 import { SearchOutlined, LogoutOutlined } from '@ant-design/icons';
-import PRList from '../components/PRList';
-import SearchByTabs from '../components/SearchByTabs';
-import { actions } from '../core/adapters/redux';
 import { connect } from 'react-redux'
 
-// function openWebPage(url) {
-//   return browser.tabs.create({ url });
-// }
+import PRList from '../components/PRList';
+import SearchByTabs from '../components/SearchByTabs';
+import { signin, pulls } from '../core/adapters/redux';
+
+const { actions, types } = pulls;
 
 const searchBys = [
   {
     display: 'Created',
-    value: actions.searchByAuthor,
+    value: types.Role.Author,
   },
   {
     display: 'Assigned',
-    value: actions.searchByAssignee,
+    value: types.Role.Assignee,
   },
   {
     display: 'Mentioned',
-    value: actions.searchByMention,
+    value: types.Role.Mentions,
   },
   {
     display: 'Review requests',
-    value: actions.searchByReviewRequested,
+    value: types.Role.ReviewRequested,
   },
 ];
 
 
 export class Main extends React.Component {
   componentDidMount() {
-    this.props.setPage(1);
+    this.props.init();
   }
 
   render() {
@@ -61,10 +60,10 @@ export class Main extends React.Component {
           </Col>
         </Row>
         <PRList
-          totalCount={this.props.totalCount}
+          totalCount={this.props.total}
           page={this.props.page}
           perPage={this.props.perPage}
-          pullRequests={this.props.pullRequests}
+          pullRequests={this.props.items}
           onPagination={this.props.setPage}
         />
       </section>
@@ -73,25 +72,23 @@ export class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { search, list } = state;
-  const { q } = search;
-  const { totalCount, page, perPage, pullRequests } = list;
+  const { list, query } = state.pulls;
+  const { total, page, perPage, items } = list;
+  const { q } = query;
 
   return {
     q,
-    totalCount,
+    total,
     page,
     perPage,
-    pullRequests: pullRequests.map(pr => {
+    items: items.map(item => {
       return {
-        number: pr.number,
-        title: pr.title,
-        body: pr.body,
-        htmlUrl: pr.htmlUrl,
-        creator: pr.creator,
-        createdAt: pr.createdAt,
-        repoFullName: pr.repo.fullName,
-        repoHtmlUrl: pr.repo.htmlUrl,
+        number: item.number,
+        title: item.title,
+        body: item.body,
+        htmlUrl: item.htmlUrl,
+        creator: item.creator,
+        createdAt: item.createdAt,
       }
     })
   };
@@ -99,13 +96,21 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setSearchBy: (value) => {
-      dispatch(actions.setSearchBy(value));
-      dispatch(actions.fetchPullRequests(1));
+    init: () => {
+      dispatch(actions.setPage(1));
+      dispatch(actions.setRole(types.Role.Author));
+      dispatch(actions.fetchPullRequests());
     },
-    setPage: (page) => dispatch(actions.fetchPullRequests(page)),
+    setSearchBy: (value) => {
+      dispatch(actions.setRole(value));
+      dispatch(actions.fetchPullRequests());
+    },
+    setPage: (page) => {
+      dispatch(actions.setPage(page));
+      dispatch(actions.fetchPullRequests());
+    },
     signout: () => {
-      dispatch(actions.signout())
+      dispatch(signin.actions.signout());
     }
   };
 }

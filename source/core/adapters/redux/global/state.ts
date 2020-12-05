@@ -13,6 +13,7 @@ export interface SigninState {
 
 export interface PullsState {
     list: PullsListState;
+    query: PullsQueryState;
 }
 
 export interface PullsListState {
@@ -21,4 +22,8 @@ export interface PullsListState {
     page: number;
     perPage: number;
     items: Array<PullRequest>;
+}
+
+export interface PullsQueryState {
+    q: string;
 }

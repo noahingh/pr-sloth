@@ -5,6 +5,8 @@ import {
     SET_PAGE,
     FETCH_PULL_REQUESTS_LOADING,
     FETCH_PULL_REQUESTS_SUCCESS,
+    BUILD_QUERY,
+    Role,
     PullsAction
 } from './types';
 
@@ -79,19 +81,16 @@ export function fetchPullRequests(): AppThunk {
     return async (dispatch, getStore) => {
         dispatch(fetchPullRequestsLoading());
 
-        const {
-            page,
-            perPage,
-        } = getStore().pulls.list;
-        const {
-            token
-        } = getStore().signin;
+        const { list, query, } = getStore().pulls
+        const { page, perPage, } = list;
+        const { q } = query; 
+        const { token } = getStore().signin;
 
         try {
             const octokit = new Octokit({ auth: token });
 
             const { data } = await octokit.search.issuesAndPullRequests({
-                q: 'type:pr is:open author:hanjunlee',
+                q,
                 page,
                 per_page: perPage,
             });
@@ -108,4 +107,30 @@ export function fetchPullRequests(): AppThunk {
             console.log('error: ' + e)
         }
     };
+}
+
+function buildQuery(param: {
+    role: Role;
+    login: string;
+}): PullsAction {
+    const {
+        role,
+        login
+    } = param;
+
+    return {
+        type: BUILD_QUERY,
+        login,
+        role,
+    };
+}
+
+export function setRole(role: Role): AppThunk {
+    return async (dispatch, getStore) => {
+        const {
+            login
+        } = getStore().signin;
+
+        dispatch(buildQuery({ role, login }));
+    }
 }
