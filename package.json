@@ -37,6 +37,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/redux-logger": "^3.0.8",
+    "@types/redux-mock-store": "^1.0.2",
     "advanced-css-reset": "^1.1.1",
     "antd": "^4.6.6",
     "emoji-log": "^1.0.2",
