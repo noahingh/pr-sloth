@@ -1,14 +1,6 @@
 import { Octokit } from '@octokit/rest';
 
-import { AppThunk, PullRequest } from '../global';
-import {
-    SET_PAGE,
-    FETCH_PULL_REQUESTS_LOADING,
-    FETCH_PULL_REQUESTS_SUCCESS,
-    BUILD_QUERY,
-    Role,
-    PullsAction
-} from './types';
+import { PullRequest } from '../../../models';
 
 export function setPage(page: number): PullsAction {
     return {

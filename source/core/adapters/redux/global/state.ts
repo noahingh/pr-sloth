@@ -1,4 +1,4 @@
-import { PullRequest } from './models';
+import { PullRequest } from '../../../models';
 
 export interface RootState {
     signin: SigninState;

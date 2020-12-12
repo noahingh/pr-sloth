@@ -1,4 +1,4 @@
-import { PullRequest } from '../global';
+import { PullRequest } from '../../../models';
 
 export const SET_PAGE = 'pulls/SET_PAGE';
 

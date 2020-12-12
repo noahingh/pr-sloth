@@ -2,8 +2,7 @@ import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { PullRequest } from '../global';
-// import Repo from '../../../models/Repo';
+import { PullRequest } from '../../../models';
 
 import { FETCH_PULL_REQUESTS_LOADING, FETCH_PULL_REQUESTS_SUCCESS } from './types';
 import { fetchPullRequests } from './actions';

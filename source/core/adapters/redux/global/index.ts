@@ -6,4 +6,3 @@ export type {
     PullsQueryState,
 } from './state';
 export type { AppThunk } from './thunk';
-export { PullRequest } from './models';
