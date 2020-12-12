@@ -1,10 +1,14 @@
 import { Octokit } from '@octokit/rest';
 
+import { AppThunk } from '../global';
 import { PullRequest } from '../../../models';
+import * as types from './types';
+
+type PullsAction = types.PullsAction;
 
 export function setPage(page: number): PullsAction {
     return {
-        type: SET_PAGE,
+        type: types.SET_PAGE,
         page
     };
 }
@@ -23,7 +27,7 @@ function fetchPullRequestsSuccess(pulls: {
     } = pulls;
 
     return {
-        type: FETCH_PULL_REQUESTS_SUCCESS,
+        type: types.FETCH_PULL_REQUESTS_SUCCESS,
         total,
         page,
         perPage,
@@ -33,7 +37,7 @@ function fetchPullRequestsSuccess(pulls: {
 
 function fetchPullRequestsLoading(): PullsAction {
     return {
-        type: FETCH_PULL_REQUESTS_LOADING
+        type: types.FETCH_PULL_REQUESTS_LOADING
     };
 }
 
@@ -75,7 +79,7 @@ export function fetchPullRequests(): AppThunk {
 
         const { list, query, } = getStore().pulls
         const { page, perPage, } = list;
-        const { q } = query; 
+        const { q } = query;
         const { token } = getStore().signin;
 
         try {
@@ -102,7 +106,7 @@ export function fetchPullRequests(): AppThunk {
 }
 
 function buildQuery(param: {
-    role: Role;
+    role: types.Role;
     login: string;
 }): PullsAction {
     const {
@@ -111,13 +115,13 @@ function buildQuery(param: {
     } = param;
 
     return {
-        type: BUILD_QUERY,
+        type: types.BUILD_QUERY,
         login,
         role,
     };
 }
 
-export function setRole(role: Role): AppThunk {
+export function setRole(role: types.Role): AppThunk {
     return async (dispatch, getStore) => {
         const {
             login
