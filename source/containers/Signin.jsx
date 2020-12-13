@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Octokit } from '@octokit/rest'
 import { Form, Input, Button, Spin } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
+
 import { signin } from '../core/adapters/redux';
+import SigninForm from '../components/SigninForm';
 
 const { types, actions } = signin;
 
@@ -20,40 +22,10 @@ export class Signin extends React.Component {
                     <GithubOutlined style={{ fontSize: '60px', color: 'black' }} />
                     <h1>Sign in to GitHub</h1>
                 </div>
-                {this.props.type === types.SIGNIN_LOADING ?
-                    <div style={{ textAlign: 'center' }}>
-                        <Spin tip="Signing in..." />
-                    </div>
+                {this.props.isSigning ?
+                    <div style={{ textAlign: 'center' }}><Spin tip="Signing in..." /></div>
                     :
-                    <div >
-                    < Form
-                        name="signin"
-                        validateTrigger="onSubmit"
-                        onFinish={this.props.signin}
-                    >
-                        <Form.Item
-                            label="Github Token"
-                            name="token"
-                            rules={[
-                                { required: true, message: 'Please input your Github token!' },
-                                {
-                                    validator: async (_, token) => {
-                                        await this.validateToken(token);
-                                    }
-                                },
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-                        <Form.Item >
-                            <Button type="primary" htmlType="submit" style={{ width: '330px' }}>
-                                Sign in
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                    </div>
-
-
+                    <div ><SigninForm signin={this.props.signin}></SigninForm></div>
                 }
             </section >
         )
@@ -63,7 +35,7 @@ export class Signin extends React.Component {
 function mapStateToProps(state) {
     const { type } = state.signin;
     return {
-        type,
+        isSigning: (type == types.SIGNIN_LOADING) ? true : false,
     };
 }
 

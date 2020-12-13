@@ -27,6 +27,7 @@ function signinSuccess(creds: {
 export function signin(token: string): AppThunk {
     return async (dispatch) => {
         dispatch(signinLoading());
+        await sleep(1);
 
         const octokit = new Octokit({ auth: token });
         try {
@@ -58,4 +59,10 @@ export function signout(): SigninAction {
     return {
         type: SIGNOUT_SUCCESS
     };
+}
+
+function sleep(second: number) {
+    return new Promise(resolve => {
+        setTimeout(resolve, second * 1000);
+    })
 }
