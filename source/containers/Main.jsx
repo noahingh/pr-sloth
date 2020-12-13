@@ -60,7 +60,7 @@ export class Main extends React.Component {
           </Col>
         </Row>
         <PRList
-          totalCount={this.props.total}
+          total={this.props.total}
           page={this.props.page}
           perPage={this.props.perPage}
           pullRequests={this.props.items}

@@ -30,14 +30,13 @@ export default class PRList extends React.Component {
                 pagination={{
                     current: this.props.page,
                     pageSize: this.props.perPage,
-                    total: this.props.totalCount,
+                    total: this.props.total,
                     onChange: (page, pageSize) => {
                         this.props.onPagination(page, pageSize);
                     },
                 }}
                 dataSource={this.props.pullRequests}
                 renderItem={item => (
-                    // TODO: make a new component to separate codes.
                     <List.Item>
                         <List.Item.Meta
                             title={
