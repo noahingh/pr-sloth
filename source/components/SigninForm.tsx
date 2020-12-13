@@ -2,11 +2,11 @@ import React from 'react';
 import { Octokit } from '@octokit/rest'
 import { Form, Input, Button } from 'antd';
 
-type Props = {
+export type SigninFormProps = {
     signin(values: any): void;
 };
 
-export default class SigninForm extends React.Component<Props> {
+export default class SigninForm extends React.Component<SigninFormProps> {
     async validateToken(token: string) {
         const octokit = new Octokit({ auth: token });
         await octokit.users.getAuthenticated();
