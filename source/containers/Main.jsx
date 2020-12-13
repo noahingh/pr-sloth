@@ -60,6 +60,7 @@ export class Main extends React.Component {
           </Col>
         </Row>
         <PRList
+          loading={this.props.loading}
           total={this.props.total}
           page={this.props.page}
           perPage={this.props.perPage}
@@ -73,10 +74,13 @@ export class Main extends React.Component {
 
 function mapStateToProps(state) {
   const { list, query } = state.pulls;
-  const { total, page, perPage, items } = list;
+  const { type, total, page, perPage, items } = list;
   const { q } = query;
 
+  const loading = (type == types.FETCH_PULL_REQUESTS_LOADING) ? true : false;
+
   return {
+    loading,
     q,
     total,
     page,

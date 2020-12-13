@@ -1,11 +1,13 @@
 import React from 'react';
-import { List, Row, Col, Button } from 'antd';
+import { List, Row, Col, Button, Skeleton } from 'antd';
 import { PullRequestOutlined } from '@ant-design/icons';
 import { browser } from 'webextension-polyfill-ts';
 import moment from 'moment';
 import PRPopover from './PRPopover';
+import { PaginationConfig } from 'antd/lib/pagination';
 
 export type PRListProps = {
+    loading: boolean;
     total: number;
     page: number;
     perPage: number;
@@ -14,38 +16,51 @@ export type PRListProps = {
 }
 
 export default class PRList extends React.Component<PRListProps> {
-    openWebPage(url: string) {
-        browser.tabs.create({ url, active: false });
-    }
-
-    getFromNow(date: Date) {
-        return moment(date).fromNow();
-    }
-
     render() {
         const header =
             <Row>
                 <Col><PullRequestOutlined style={{ fontSize: 16 }} /> {this.props.total} Opened</Col>
             </Row>
-        return (
+
+        const pagination: PaginationConfig = {
+            current: this.props.page,
+            pageSize: this.props.perPage,
+            total: this.props.total,
+            onChange: (page, pageSize) => {
+                this.props.onPagination(page, pageSize);
+            },
+        }
+
+        const Loading =
             <List
                 style={{ borderRadius: "5px" }}
                 bordered={true}
                 header={header}
                 itemLayout="horizontal"
-                pagination={{
-                    current: this.props.page,
-                    pageSize: this.props.perPage,
-                    total: this.props.total,
-                    onChange: (page, pageSize) => {
-                        this.props.onPagination(page, pageSize);
-                    },
-                }}
+                pagination={pagination}
+            >
+                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
+                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
+                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
+            </List>
+
+        const Default =
+            <List
+                style={{ borderRadius: "5px" }}
+                bordered={true}
+                header={header}
+                itemLayout="horizontal"
+                pagination={pagination}
                 dataSource={this.props.items}
                 renderItem={item => (
                     <PRItem {...item} />
                 )}
             />
+
+        return (
+            (this.props.loading) ?
+                Loading :
+                Default
         );
     }
 }

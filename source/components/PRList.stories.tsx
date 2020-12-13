@@ -42,3 +42,12 @@ Default.args = {
         }
     ],
 };
+
+export const Loading = Template.bind({})
+Loading.args = {
+    loading: true,
+    total: 2,
+    page: 1,
+    perPage: 3,
+    items: [],
+}

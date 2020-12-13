@@ -70,6 +70,7 @@ function listReducer(
 
             return {
                 ...state,
+                type,
                 total,
                 page,
                 perPage,
