@@ -1,8 +1,11 @@
+import Repo from './Repo';
+
 export default class PullRequest {
     number: number;
     title: string;
     body: string;
     htmlUrl: string;
+    repo: Repo;
     creator: string;
     createdAt: Date;
 
@@ -11,6 +14,7 @@ export default class PullRequest {
         title: string,
         body: string,
         htmlUrl: string,
+        repo: Repo,
         creator: string,
         createdAt: Date,
     }) {
@@ -18,6 +22,7 @@ export default class PullRequest {
         this.title = pr.title;
         this.body = pr.body;
         this.htmlUrl = pr.htmlUrl;
+        this.repo = pr.repo;
         this.creator = pr.creator;
         this.createdAt = pr.createdAt;
     }

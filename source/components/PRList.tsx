@@ -5,26 +5,15 @@ import { browser } from 'webextension-polyfill-ts';
 import moment from 'moment';
 import PRPopover from './PRPopover';
 
-type Props = {
+export type PRListProps = {
     total: number;
     page: number;
     perPage: number;
     onPagination(page: number, perPage?: number): void;
-    items: Array<PullRequest>;
+    items: Array<PRItemProps>;
 }
 
-type PullRequest = {
-    number: number;
-    title: string;
-    body: string;
-    htmlUrl: string
-    repoFullName: string;
-    repoHtmlUrl: string;
-    creator: string;
-    createdAt: Date;
-}
-
-export default class PRList extends React.Component<Props> {
+export default class PRList extends React.Component<PRListProps> {
     openWebPage(url: string) {
         browser.tabs.create({ url, active: false });
     }
@@ -44,7 +33,6 @@ export default class PRList extends React.Component<Props> {
                 bordered={true}
                 header={header}
                 itemLayout="horizontal"
-                // size="large"
                 pagination={{
                     current: this.props.page,
                     pageSize: this.props.perPage,
@@ -55,41 +43,70 @@ export default class PRList extends React.Component<Props> {
                 }}
                 dataSource={this.props.items}
                 renderItem={item => (
-                    <List.Item>
-                        <List.Item.Meta
-                            title={
-                                <div>
-                                    <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
-                                    <Button
-                                        style={{ color: 'gray', padding: '4px 1px' }}
-                                        type="link"
-                                        onClick={() => { this.openWebPage(item.repoHtmlUrl) }}
-                                    >
-                                        {item.repoFullName}
-                                    </Button>
-                                    <PRPopover
-                                        title={item.title}
-                                        number={item.number}
-                                        description={item.body}
-                                    >
-                                        <Button
-                                            style={{ color: 'black' }}
-                                            type="link"
-                                            onClick={() => { this.openWebPage(item.htmlUrl) }}
-                                        >
-                                            {item.title}
-                                        </Button>
-                                    </PRPopover>
-                                </div>
-                            }
-                            description={
-                                '#' + item.number.toString() + ' opened ' + this.getFromNow(item.createdAt) + ' by ' + item.creator + '.'
-                            }
-                        />
-                    </List.Item>
+                    <PRItem {...item} />
                 )}
             />
         );
     }
 }
 
+type PRItemProps = {
+    number: number;
+    title: string;
+    body: string;
+    htmlUrl: string
+    creator: string;
+    createdAt: Date;
+    repo: {
+        fullName: string;
+        htmlUrl: string;
+    },
+}
+
+class PRItem extends React.Component<PRItemProps> {
+    openWebPage(url: string) {
+        browser.tabs.create({ url, active: false });
+    }
+
+    getFromNow(date: Date) {
+        return moment(date).fromNow();
+    }
+
+    render() {
+        return (
+            <List.Item>
+                <List.Item.Meta
+                    title={
+                        <div>
+                            <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
+                            <Button
+                                style={{ color: 'gray', padding: '4px 1px' }}
+                                type="link"
+                                onClick={() => { this.openWebPage(this.props.repo.htmlUrl) }}
+                            >
+                                {this.props.repo.fullName}
+                            </Button>
+                            <PRPopover
+                                title={this.props.title}
+                                number={this.props.number}
+                                description={this.props.body}
+                            >
+                                <Button
+                                    style={{ color: 'black' }}
+                                    type="link"
+                                    onClick={() => { this.openWebPage(this.props.htmlUrl) }}
+                                >
+                                    {this.props.title}
+                                </Button>
+                            </PRPopover>
+                        </div>
+                    }
+                    description={
+                        '#' + this.props.number.toString() + ' opened ' + this.getFromNow(this.props.createdAt) + ' by ' + this.props.creator + '.'
+                    }
+                />
+            </List.Item>
+
+        )
+    }
+}

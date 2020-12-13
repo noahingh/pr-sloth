@@ -1,4 +1,5 @@
 import PullRequest from './PullRequest';
+import Repo from './Repo';
 
 test('PullRequest getter', function () {
     const pr = new PullRequest({
@@ -6,6 +7,10 @@ test('PullRequest getter', function () {
         title: 'Add foo component',
         body: 'Add a new component',
         htmlUrl: 'github.com/hanjunlee/pr-sloth',
+        repo: new Repo({
+            owner: 'hanjunlee', 
+            repo: 'pr-sloth',
+        }),
         creator: 'hanjunlee',
         createdAt: new Date(),
     })

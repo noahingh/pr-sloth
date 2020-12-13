@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
 
 import { AppThunk } from '../global';
-import { PullRequest } from '../../../models';
+import { PullRequest, Repo } from '../../../models';
 import * as types from './types';
 
 type PullsAction = types.PullsAction;
@@ -46,6 +46,7 @@ function convertPullRequestData(item: {
     title: string;
     body: string;
     html_url: string;
+    repository_url: string;
     user: {
         login: string;
     };
@@ -62,15 +63,29 @@ function convertPullRequestData(item: {
     const {
         login
     } = user;
+    const { owner, repo } = parseRepositoryUrl(item.repository_url)
 
     return new PullRequest({
+        ...item,
         number,
         title,
         body,
         htmlUrl: html_url,
+        repo: new Repo({
+            owner,
+            repo,
+        }),
         creator: login,
         createdAt: new Date(created_at),
     });
+}
+
+function parseRepositoryUrl(url: string) {
+    const ret = url.replace('https://api.github.com/repos/', '').split('/')
+    return {
+        owner: ret[0],
+        repo: ret[1],
+    };
 }
 
 export function fetchPullRequests(): AppThunk {

@@ -23,7 +23,10 @@ Default.args = {
             htmlUrl: '',
             creator: 'sloth',
             createdAt: new Date('2020-09-12T20:10:41Z'),
-            repoFullName: 'octocat/pr-sloth',
+            repo: {
+                fullName: 'octocat/pr-sloth',
+                htmlUrl: '',
+            },
         },
         {
             number: 12,
@@ -32,7 +35,10 @@ Default.args = {
             htmlUrl: '',
             creator: 'sloth',
             createdAt: new Date('2020-10-13T20:10:41Z'),
-            repoFullName: 'octocat/pr-sloth',
+            repo: {
+                fullName: 'octocat/pr-sloth',
+                htmlUrl: '',
+            }
         }
     ],
 };

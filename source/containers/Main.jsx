@@ -89,6 +89,10 @@ function mapStateToProps(state) {
         htmlUrl: item.htmlUrl,
         creator: item.creator,
         createdAt: item.createdAt,
+        repo: {
+          fullName: item.repo.fullName,
+          htmlUrl: item.repo.htmlUrl
+        }
       }
     })
   };
