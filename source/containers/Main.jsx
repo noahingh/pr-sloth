@@ -63,7 +63,7 @@ export class Main extends React.Component {
           total={this.props.total}
           page={this.props.page}
           perPage={this.props.perPage}
-          pullRequests={this.props.items}
+          items={this.props.items}
           onPagination={this.props.setPage}
         />
       </section>

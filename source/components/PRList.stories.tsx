@@ -13,7 +13,7 @@ Default.args = {
     totalCount: 2,
     page: 1,
     perPage: 3,
-    pullRequests: [
+    items: [
         {
             number: 10,
             title: 'Add a foo component.',

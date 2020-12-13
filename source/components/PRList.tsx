@@ -10,7 +10,7 @@ type Props = {
     page: number;
     perPage: number;
     onPagination(page: number, perPage?: number): void;
-    pullRequests: Array<PullRequest>;
+    items: Array<PullRequest>;
 }
 
 type PullRequest = {
@@ -53,7 +53,7 @@ export default class PRList extends React.Component<Props> {
                         this.props.onPagination(page, pageSize);
                     },
                 }}
-                dataSource={this.props.pullRequests}
+                dataSource={this.props.items}
                 renderItem={item => (
                     <List.Item>
                         <List.Item.Meta
