@@ -73,34 +73,35 @@ class PRItem extends React.Component<PRItemProps> {
     }
 
     render() {
+        const title = (
+            <div>
+                <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
+                <Button
+                    style={{ color: 'gray', padding: '4px 1px' }}
+                    type="link"
+                    onClick={() => { this.openWebPage(this.props.repo.htmlUrl) }}
+                >
+                    {this.props.repo.fullName}
+                </Button>
+                <PRPopover
+                    title={this.props.title}
+                    number={this.props.number}
+                    description={this.props.body}
+                >
+                    <Button
+                        style={{ color: 'black' }}
+                        type="link"
+                        onClick={() => { this.openWebPage(this.props.htmlUrl) }}
+                    >
+                        {this.props.title}
+                    </Button>
+                </PRPopover>
+            </div>
+        )
         return (
             <List.Item>
                 <List.Item.Meta
-                    title={
-                        <div>
-                            <PullRequestOutlined style={{ fontSize: 16, color: "green" }} />
-                            <Button
-                                style={{ color: 'gray', padding: '4px 1px' }}
-                                type="link"
-                                onClick={() => { this.openWebPage(this.props.repo.htmlUrl) }}
-                            >
-                                {this.props.repo.fullName}
-                            </Button>
-                            <PRPopover
-                                title={this.props.title}
-                                number={this.props.number}
-                                description={this.props.body}
-                            >
-                                <Button
-                                    style={{ color: 'black' }}
-                                    type="link"
-                                    onClick={() => { this.openWebPage(this.props.htmlUrl) }}
-                                >
-                                    {this.props.title}
-                                </Button>
-                            </PRPopover>
-                        </div>
-                    }
+                    title={title}
                     description={
                         '#' + this.props.number.toString() + ' opened ' + this.getFromNow(this.props.createdAt) + ' by ' + this.props.creator + '.'
                     }
