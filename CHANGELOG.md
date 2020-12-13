@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Change javascript into typescript.
+
+## [0.2.0]
+
+### Added
 - Add popover to the list.
 
 ## [0.1.0]
