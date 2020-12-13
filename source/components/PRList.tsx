@@ -1,24 +1,42 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { List, Row, Col, Button } from 'antd';
 import { PullRequestOutlined } from '@ant-design/icons';
-import browser from 'webextension-polyfill';
+import { browser } from 'webextension-polyfill-ts';
 import moment from 'moment';
 import PRPopover from './PRPopover';
 
-export default class PRList extends React.Component {
-    openWebPage(url) {
+type Props = {
+    total: number;
+    page: number;
+    perPage: number;
+    onPagination(page: number, perPage?: number): void;
+    pullRequests: Array<PullRequest>;
+}
+
+type PullRequest = {
+    number: number;
+    title: string;
+    body: string;
+    htmlUrl: string
+    repoFullName: string;
+    repoHtmlUrl: string;
+    creator: string;
+    createdAt: Date;
+}
+
+export default class PRList extends React.Component<Props> {
+    openWebPage(url: string) {
         browser.tabs.create({ url, active: false });
     }
 
-    getFromNow(date) {
+    getFromNow(date: Date) {
         return moment(date).fromNow();
     }
 
     render() {
         const header =
             <Row>
-                <Col><PullRequestOutlined style={{ fontSize: 16 }} /> {this.props.totalCount} Opened</Col>
+                <Col><PullRequestOutlined style={{ fontSize: 16 }} /> {this.props.total} Opened</Col>
             </Row>
         return (
             <List
@@ -75,36 +93,3 @@ export default class PRList extends React.Component {
     }
 }
 
-PRList.propTypes = {
-    /**
-     * Size of items.
-     */
-    totalCount: PropTypes.number,
-    /**
-     * Current page number.
-     */
-    page: PropTypes.number,
-    /**
-     * Number of items per page.
-     */
-    perPage: PropTypes.number,
-    /**
-     * Array of objects.
-     */
-    pullRequests: PropTypes.arrayOf(PropTypes.exact({
-        // pull request.
-        number: PropTypes.number,
-        title: PropTypes.string,
-        body: PropTypes.string,
-        htmlUrl: PropTypes.string,
-        creator: PropTypes.string,
-        createdAt: PropTypes.instanceOf(Date),
-        // repository.
-        repoFullName: PropTypes.string,
-        repoHtmlUrl: PropTypes.string,
-    })),
-    /**
-     * Function of onChange of pagniation.
-     */
-    onPagination: PropTypes.func,
-}
