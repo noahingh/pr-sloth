@@ -1,5 +1,5 @@
-import PullRequest from './PullRequest';
-import Repo from './Repo';
+import PullRequest from './pullRequest';
+import Repo from './repo';
 
 test('PullRequest getter', function () {
     const pr = new PullRequest({
@@ -8,7 +8,7 @@ test('PullRequest getter', function () {
         body: 'Add a new component',
         htmlUrl: 'github.com/hanjunlee/pr-sloth',
         repo: new Repo({
-            owner: 'hanjunlee', 
+            owner: 'hanjunlee',
             repo: 'pr-sloth',
         }),
         creator: 'hanjunlee',

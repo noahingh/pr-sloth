@@ -1,4 +1,4 @@
-import Repo from './Repo';
+import Repo from './repo';
 
 export default class PullRequest {
     number: number;

@@ -1,4 +1,4 @@
-import Repo from './Repo';
+import Repo from './repo';
 
 test('Repo fullName getter', function () {
     const pr = new Repo({

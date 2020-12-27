@@ -1,5 +1,5 @@
-import PullRequest from './PullRequest'
-import Repo from './Repo'
+import PullRequest from './pullRequest'
+import Repo from './repo'
 
 export {
   PullRequest,
