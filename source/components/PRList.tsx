@@ -39,9 +39,9 @@ export default class PRList extends React.Component<PRListProps> {
                 itemLayout="horizontal"
                 pagination={pagination}
             >
-                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
-                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
-                <List.Item><Skeleton avatar title={false} loading={true} active></Skeleton></List.Item>
+                <List.Item><Skeleton title={false} loading={true} active></Skeleton></List.Item>
+                <List.Item><Skeleton title={false} loading={true} active></Skeleton></List.Item>
+                <List.Item><Skeleton title={false} loading={true} active></Skeleton></List.Item>
             </List>
 
         const Default =
