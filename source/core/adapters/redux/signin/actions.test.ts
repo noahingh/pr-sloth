@@ -28,6 +28,6 @@ test('login success', () => {
     },
   ];
 
-  return store.dispatch(signin('token'))
+  return store.dispatch<any>(signin('token'))
       .then(() => {expect(store.getActions()).toEqual(expectedActions)})
 })
