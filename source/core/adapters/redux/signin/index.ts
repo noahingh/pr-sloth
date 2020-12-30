@@ -1,3 +1,7 @@
-export * as actions from './actions';
-export * as reducers from './reducers';
-export * as types from './types';
+import { signinSlice, signin } from './slice';
+
+export const actions = {
+    ...signinSlice.actions,
+    signin,
+}
+export const reducer = signinSlice.reducer;

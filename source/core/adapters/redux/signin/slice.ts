@@ -21,7 +21,7 @@ export const signin = createAsyncThunk<
 
             return { token, login } as types.SigninSuccessPayload;
         } catch (e) {
-            rejectWithValue(e);
+            return rejectWithValue(e);
         }
     }
 )

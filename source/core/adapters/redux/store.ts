@@ -3,13 +3,13 @@ import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { combineReducers } from 'redux';
 
-import { signinReducer } from './signin/reducers';
+import * as signin from './signin';
 import { pullsReducer } from './pulls/reducers';
 
 const loggerMiddleware = createLogger()
 
 const rootReducer = combineReducers({
-  signin: signinReducer,
+  signin: signin.reducer,
   pulls: pullsReducer,
 })
 

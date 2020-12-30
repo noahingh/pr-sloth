@@ -4,10 +4,11 @@ import { Octokit } from '@octokit/rest'
 import { Form, Input, Button, Spin } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
-import { signin } from '../core/adapters/redux';
+import { global, signin } from '../core/adapters/redux';
 import SigninForm from '../components/SigninForm';
 
-const { types, actions } = signin;
+const { actions } = signin;
+const { LoadingStatus } = global;
 
 export class Signin extends React.Component {
     async validateToken(token) {
@@ -33,9 +34,9 @@ export class Signin extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { type } = state.signin;
+    const { loading } = state.signin;
     return {
-        isSigning: (type == types.SIGNIN_LOADING) ? true : false,
+        isSigning: (loading == LoadingStatus.Loading) ? true : false,
     };
 }
 
