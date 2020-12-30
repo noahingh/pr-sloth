@@ -6,7 +6,7 @@ describe('QueryBuilder.buildQuery', () => {
         builer.login = 'hanjunlee'
 
         const q = builer.buildQuery();
-        expect(q).toBe('is:open author:hanjunlee archived:false')
+        expect(q).toBe('is:pr is:open author:hanjunlee archived:false')
     })
 
     it('returns the assignee role', () => {
@@ -15,8 +15,8 @@ describe('QueryBuilder.buildQuery', () => {
             login: 'hanjunlee',
         });
 
-        const q = builer.buildQuery()
-        expect(q).toBe('is:open assignee:hanjunlee archived:false')
+        const q = builer.buildQuery();
+        expect(q).toBe('is:pr is:open assignee:hanjunlee archived:false')
 
     })
 })
