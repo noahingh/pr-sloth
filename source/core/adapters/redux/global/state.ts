@@ -7,6 +7,7 @@ export interface RootState {
 
 export interface SigninState {
     type: string;
+    loading: LoadingStatus;
     login: string;
     token: string;
 }
@@ -16,4 +17,11 @@ export interface PullsState {
     items: Array<PullRequest>;
     paginator: Paginator;
     builder: QueryBuilder;
+}
+
+export enum LoadingStatus {
+    Idle = 1,
+    Loading, 
+    Success,
+    Failed
 }
