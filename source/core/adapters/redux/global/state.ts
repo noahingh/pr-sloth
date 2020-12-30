@@ -13,6 +13,7 @@ export interface SigninState {
 
 export interface PullsState {
     type: string;
+    loading: LoadingStatus;
     items: Array<PullRequest>;
     paginator: Paginator;
     builder: QueryBuilder;
@@ -20,7 +21,7 @@ export interface PullsState {
 
 export enum LoadingStatus {
     Idle = 1,
-    Loading, 
+    Loading,
     Success,
     Failed
 }

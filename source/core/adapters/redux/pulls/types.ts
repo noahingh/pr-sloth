@@ -43,3 +43,17 @@ export type PullsAction = SetPageAction
     | FetchPullRequestsLoadingAction
     | FetchPullRequestsSuccessAction
     | BuildQueryAction;
+
+export interface SetPagePayload {
+    page: number;
+}
+
+export interface FetchPullRequestsPayLoad {
+    total: number;
+    items: Array<PullRequest>;
+}
+
+export interface SetRolePayLoad {
+    role: Role;
+    login: string;
+}
