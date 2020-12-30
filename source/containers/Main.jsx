@@ -74,14 +74,14 @@ export class Main extends React.Component {
 
 function mapStateToProps(state) {
   const { list, query } = state.pulls;
-  const { type,  items, paginator } = list;
-  const { q } = query;
+  const { type, items, paginator } = list;
+  const { builder } = query;
 
   const loading = (type == types.FETCH_PULL_REQUESTS_LOADING) ? true : false;
 
   return {
     loading,
-    q,
+    q: builder.buildQuery(),
     total: paginator.total,
     page: paginator.page,
     perPage: paginator.perPage,

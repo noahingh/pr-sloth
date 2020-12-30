@@ -94,7 +94,8 @@ export function fetchPullRequests(): AppThunk {
 
         const { list, query, } = getStore().pulls
         const { paginator } = list;
-        const { q } = query;
+        const { builder } = query;
+        const q = builder.buildQuery();
         const { token } = getStore().signin;
 
         try {

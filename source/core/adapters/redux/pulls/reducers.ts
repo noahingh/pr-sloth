@@ -1,6 +1,6 @@
 import produce from "immer";
 
-import { Paginator } from '../../../models';
+import { Paginator, QueryBuilder } from '../../../models';
 import {
     PullsState,
     PullsListState,
@@ -10,7 +10,6 @@ import {
     FETCH_PULL_REQUESTS_LOADING,
     FETCH_PULL_REQUESTS_SUCCESS,
     BUILD_QUERY,
-    Role,
     PullsAction,
     SET_PAGE,
 } from './types';
@@ -22,7 +21,7 @@ const initState: PullsState = {
         paginator: new Paginator({ total: 0, perPage: 3 })
     },
     query: {
-        q: '',
+        builder: new QueryBuilder(),
     }
 };
 
@@ -97,27 +96,14 @@ function queryReducer(
                 login,
             } = action;
 
-            const r = getRoleString(role);
-            const q = `is:open is:pr ${r}:${login} archived:false `;
             return {
                 ...state,
-                q,
+                builder: produce(state.builder, draft => {
+                    draft.login = login;
+                    draft.role = role;
+                })
             };
         default:
             return state
-    }
-}
-
-function getRoleString(role: Role) {
-    if (role == Role.Author) {
-        return 'author';
-    } else if (role == Role.Assignee) {
-        return 'assignee';
-    } else if (role == Role.Mentions) {
-        return 'mentions';
-    } else if (role == Role.ReviewRequested) {
-        return 'review-requested'
-    } else {
-        return 'author'
     }
 }

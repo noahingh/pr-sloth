@@ -1,4 +1,4 @@
-import { Paginator, PullRequest } from '../../../models';
+import { Paginator, PullRequest, QueryBuilder } from '../../../models';
 
 export interface RootState {
     signin: SigninState;
@@ -23,5 +23,5 @@ export interface PullsListState {
 }
 
 export interface PullsQueryState {
-    q: string;
+    builder: QueryBuilder;
 }

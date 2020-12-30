@@ -1,7 +1,7 @@
 import { immerable } from "immer"
 
 export class Paginator {
-    [immerable] = true
+    [immerable] = true;
     total: number;
     page: number;
     perPage: number;
