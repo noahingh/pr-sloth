@@ -1,3 +1,6 @@
+import produce from "immer";
+
+import { Paginator } from '../../../models';
 import {
     PullsState,
     PullsListState,
@@ -15,10 +18,8 @@ import {
 const initState: PullsState = {
     list: {
         type: '',
-        total: 0,
-        page: 1,
-        perPage: 3,
         items: [],
+        paginator: new Paginator({ total: 0, perPage: 3 })
     },
     query: {
         q: '',
@@ -53,7 +54,9 @@ function listReducer(
             return {
                 ...state,
                 type,
-                page: action.page,
+                paginator: produce(state.paginator, draft => {
+                    draft.setPage(action.page);
+                })
             };
         case FETCH_PULL_REQUESTS_LOADING:
             return {
@@ -71,10 +74,11 @@ function listReducer(
             return {
                 ...state,
                 type,
-                total,
-                page,
-                perPage,
-                items
+                items,
+                paginator: produce(state.paginator, draft => {
+                    draft.reset({ total, perPage });
+                    draft.setPage(page);
+                }),
             };
         default:
             return state

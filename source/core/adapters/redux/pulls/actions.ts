@@ -93,7 +93,7 @@ export function fetchPullRequests(): AppThunk {
         dispatch(fetchPullRequestsLoading());
 
         const { list, query, } = getStore().pulls
-        const { page, perPage, } = list;
+        const { paginator } = list;
         const { q } = query;
         const { token } = getStore().signin;
 
@@ -102,16 +102,16 @@ export function fetchPullRequests(): AppThunk {
 
             const { data } = await octokit.search.issuesAndPullRequests({
                 q,
-                page,
-                per_page: perPage,
+                page: paginator.page,
+                per_page: paginator.perPage,
             });
 
             const items = await Promise.all(data.items.map(async item => convertPullRequestData(item)));
 
             dispatch(fetchPullRequestsSuccess({
                 total: data.total_count,
-                page,
-                perPage,
+                page: paginator.page,
+                perPage: paginator.perPage,
                 items,
             }));
         } catch (e) {

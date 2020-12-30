@@ -74,7 +74,7 @@ export class Main extends React.Component {
 
 function mapStateToProps(state) {
   const { list, query } = state.pulls;
-  const { type, total, page, perPage, items } = list;
+  const { type,  items, paginator } = list;
   const { q } = query;
 
   const loading = (type == types.FETCH_PULL_REQUESTS_LOADING) ? true : false;
@@ -82,9 +82,9 @@ function mapStateToProps(state) {
   return {
     loading,
     q,
-    total,
-    page,
-    perPage,
+    total: paginator.total,
+    page: paginator.page,
+    perPage: paginator.perPage,
     items: items.map(item => {
       return {
         number: item.number,
@@ -105,7 +105,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     init: () => {
-      dispatch(actions.setPage(1));
       dispatch(actions.setRole(types.Role.Author));
       dispatch(actions.fetchPullRequests());
     },

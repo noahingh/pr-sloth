@@ -1,4 +1,4 @@
-import { PullRequest } from '../../../models';
+import { Paginator, PullRequest } from '../../../models';
 
 export interface RootState {
     signin: SigninState;
@@ -18,10 +18,8 @@ export interface PullsState {
 
 export interface PullsListState {
     type: string;
-    total: number;
-    page: number;
-    perPage: number;
     items: Array<PullRequest>;
+    paginator: Paginator;
 }
 
 export interface PullsQueryState {

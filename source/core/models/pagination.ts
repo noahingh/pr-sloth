@@ -1,4 +1,7 @@
+import { immerable } from "immer"
+
 export class Paginator {
+    [immerable] = true
     total: number;
     page: number;
     perPage: number;
@@ -10,6 +13,15 @@ export class Paginator {
         this.total = props.total;
         this.page = 1;
         this.perPage = props.perPage;
+    }
+
+    reset(props: {
+        total: number;
+        perPage: number;
+    }): void {
+        this.total = props.total;
+        this.page = 1;
+        this.perPage = props.perPage
     }
 
     setPage(page: number): void | never {
