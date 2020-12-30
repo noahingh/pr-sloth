@@ -66,6 +66,9 @@ export function pullsReducer(
 
             return {
                 ...state,
+                paginator: produce(state.paginator, draft => {
+                    draft.reset(0);
+                }),
                 builder: produce(state.builder, draft => {
                     draft.login = login;
                     draft.role = role;

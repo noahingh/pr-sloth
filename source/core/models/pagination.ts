@@ -6,22 +6,16 @@ export class Paginator {
     page: number;
     perPage: number;
 
-    constructor(props: {
-        total: number;
-        perPage: number;
-    }) {
-        this.total = props.total;
+    constructor(total: number, perPage: number = 3) {
+        this.total = total;
         this.page = 1;
-        this.perPage = props.perPage;
+        this.perPage = perPage;
     }
 
-    reset(props: {
-        total: number;
-        perPage: number;
-    }): void {
-        this.total = props.total;
+    reset( total: number, perPage: number = 3): void {
+        this.total = total;
         this.page = 1;
-        this.perPage = props.perPage
+        this.perPage = perPage;
     }
 
     setPage(page: number): void | never {
