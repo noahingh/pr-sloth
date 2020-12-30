@@ -6,7 +6,6 @@ export interface RootState {
 }
 
 export interface SigninState {
-    type: string;
     loading: LoadingStatus;
     login: string;
     token: string;

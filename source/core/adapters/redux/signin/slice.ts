@@ -27,7 +27,6 @@ export const signin = createAsyncThunk<
 )
 
 const initialState: SigninState = {
-    type: '',
     loading: LoadingStatus.Idle,
     login: '',
     token: '',
