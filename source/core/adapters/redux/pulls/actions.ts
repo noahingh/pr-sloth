@@ -92,9 +92,7 @@ export function fetchPullRequests(): AppThunk {
     return async (dispatch, getStore) => {
         dispatch(fetchPullRequestsLoading());
 
-        const { list, query, } = getStore().pulls
-        const { paginator } = list;
-        const { builder } = query;
+        const { paginator, builder, } = getStore().pulls
         const q = builder.buildQuery();
         const { token } = getStore().signin;
 

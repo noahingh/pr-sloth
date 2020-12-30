@@ -73,9 +73,7 @@ export class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { list, query } = state.pulls;
-  const { type, items, paginator } = list;
-  const { builder } = query;
+  const { type, items, paginator, builder } = state.pulls;
 
   const loading = (type == types.FETCH_PULL_REQUESTS_LOADING) ? true : false;
 

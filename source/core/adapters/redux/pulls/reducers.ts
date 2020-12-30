@@ -3,8 +3,6 @@ import produce from "immer";
 import { Paginator, QueryBuilder } from '../../../models';
 import {
     PullsState,
-    PullsListState,
-    PullsQueryState,
 } from '../global';
 import {
     FETCH_PULL_REQUESTS_LOADING,
@@ -15,35 +13,16 @@ import {
 } from './types';
 
 const initState: PullsState = {
-    list: {
-        type: '',
-        items: [],
-        paginator: new Paginator({ total: 0, perPage: 3 })
-    },
-    query: {
-        builder: new QueryBuilder(),
-    }
+    type: '',
+    items: [],
+    paginator: new Paginator({ total: 0, perPage: 3 }),
+    builder: new QueryBuilder(),
 };
 
 export function pullsReducer(
     state = initState,
     action: PullsAction,
 ): PullsState {
-    const {
-        list,
-        query,
-    } = state;
-
-    return {
-        list: listReducer(list, action),
-        query: queryReducer(query, action)
-    };
-}
-
-function listReducer(
-    state: PullsListState,
-    action: PullsAction,
-): PullsListState {
     const {
         type
     } = action;
@@ -79,17 +58,6 @@ function listReducer(
                     draft.setPage(page);
                 }),
             };
-        default:
-            return state
-    }
-
-}
-
-function queryReducer(
-    state: PullsQueryState,
-    action: PullsAction,
-): PullsQueryState {
-    switch (action.type) {
         case BUILD_QUERY:
             const {
                 role,

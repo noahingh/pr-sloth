@@ -12,16 +12,8 @@ export interface SigninState {
 }
 
 export interface PullsState {
-    list: PullsListState;
-    query: PullsQueryState;
-}
-
-export interface PullsListState {
     type: string;
     items: Array<PullRequest>;
     paginator: Paginator;
-}
-
-export interface PullsQueryState {
     builder: QueryBuilder;
 }
