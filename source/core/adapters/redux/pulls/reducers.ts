@@ -15,7 +15,7 @@ import {
 const initState: PullsState = {
     type: '',
     items: [],
-    paginator: new Paginator({ total: 0, perPage: 3 }),
+    paginator: new Paginator(0),
     builder: new QueryBuilder(),
 };
 
@@ -44,8 +44,6 @@ export function pullsReducer(
         case FETCH_PULL_REQUESTS_SUCCESS:
             const {
                 total,
-                page,
-                perPage,
                 items,
             } = action;
 
@@ -54,8 +52,7 @@ export function pullsReducer(
                 type,
                 items,
                 paginator: produce(state.paginator, draft => {
-                    draft.reset({ total, perPage });
-                    draft.setPage(page);
+                    draft.total = total;
                 }),
             };
         case BUILD_QUERY:

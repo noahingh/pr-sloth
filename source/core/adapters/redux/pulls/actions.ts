@@ -15,22 +15,16 @@ export function setPage(page: number): PullsAction {
 
 function fetchPullRequestsSuccess(pulls: {
     total: number;
-    page: number;
-    perPage: number;
     items: Array<PullRequest>;
 }): PullsAction {
     const {
         total,
-        page,
-        perPage,
         items,
     } = pulls;
 
     return {
         type: types.FETCH_PULL_REQUESTS_SUCCESS,
         total,
-        page,
-        perPage,
         items
     };
 }
@@ -109,8 +103,6 @@ export function fetchPullRequests(): AppThunk {
 
             dispatch(fetchPullRequestsSuccess({
                 total: data.total_count,
-                page: paginator.page,
-                perPage: paginator.perPage,
                 items,
             }));
         } catch (e) {

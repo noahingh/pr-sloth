@@ -20,8 +20,6 @@ interface FetchPullRequestsLoadingAction {
 interface FetchPullRequestsSuccessAction {
     type: typeof FETCH_PULL_REQUESTS_SUCCESS;
     total: number;
-    page: number;
-    perPage: number;
     items: Array<PullRequest>;
 }
 
@@ -32,6 +30,9 @@ export enum Role {
     ReviewRequested,
 }
 
+/**
+ * It occurs when we click the tabs or the toggle button.
+ */
 interface BuildQueryAction {
     type: typeof BUILD_QUERY;
     role: Role;
