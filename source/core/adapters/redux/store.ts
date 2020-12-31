@@ -3,14 +3,14 @@ import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { combineReducers } from 'redux';
 
+import * as pulls from './pulls';
 import * as signin from './signin';
-import { pullsReducer } from './pulls/reducers';
 
 const loggerMiddleware = createLogger()
 
 const rootReducer = combineReducers({
   signin: signin.reducer,
-  pulls: pullsReducer,
+  pulls: pulls.reducer,
 })
 
 export function configureStore(preloadedState: any) {

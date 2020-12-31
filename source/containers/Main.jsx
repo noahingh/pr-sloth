@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 
 import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
-import { signin, pulls } from '../core/adapters/redux';
+import { signin, pulls, global } from '../core/adapters/redux';
 
 const { actions, types } = pulls;
+const { LoadingStatus } = global;
 
 const searchBys = [
   {
@@ -73,12 +74,10 @@ export class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { type, items, paginator, builder } = state.pulls;
-
-  const loading = (type == types.FETCH_PULL_REQUESTS_LOADING) ? true : false;
+  const { type, loading, items, paginator, builder } = state.pulls;
 
   return {
-    loading,
+    loading: (loading == LoadingStatus.Loading) ? true : false,
     q: builder.buildQuery(),
     total: paginator.total,
     page: paginator.page,

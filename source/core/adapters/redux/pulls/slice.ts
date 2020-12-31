@@ -43,7 +43,7 @@ export const setRole = createAsyncThunk<
     Role,
     { state: RootState }
 >(
-    'pulls/fetchPullRequests',
+    'pulls/setRole',
     async (role, { getState }) => {
         const { login } = getState().signin;
         return {
@@ -90,7 +90,7 @@ export const pullsSlice = createSlice({
         })
 
         builder.addCase(setRole.fulfilled, (state, action) => {
-            const { role, login} = action.payload;
+            const { role, login } = action.payload;
 
             state.loading = LoadingStatus.Idle;
             state.paginator.reset(0);

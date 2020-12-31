@@ -24,7 +24,7 @@ interface FetchPullRequestsSuccessAction {
 }
 
 export enum Role {
-    Author = 0,
+    Author = 1,
     Assignee,
     Mentions,
     ReviewRequested,
