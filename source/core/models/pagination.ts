@@ -6,13 +6,13 @@ export class Paginator {
     page: number;
     perPage: number;
 
-    constructor(total: number, perPage: number = 3) {
+    constructor(total: number = 0, perPage: number = 3) {
         this.total = total;
         this.page = 1;
         this.perPage = perPage;
     }
 
-    reset( total: number, perPage: number = 3): void {
+    reset( total: number = 0, perPage: number = 3): void {
         this.total = total;
         this.page = 1;
         this.perPage = perPage;

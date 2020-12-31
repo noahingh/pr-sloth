@@ -1,6 +1,6 @@
 import { Paginator } from './pagination';
 
-describe('paginator.init', () => {
+describe('paginator.reset', () => {
     it('set total and perPage properties', () => {
         const p = new Paginator(3, 1);
 
