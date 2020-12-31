@@ -1,9 +1,9 @@
-import { pullsSlice, fetchPullRequests, setRole } from './slice';
+import { pullsSlice, init, fetchPullRequests } from './slice';
 
 const actions = {
     ...pullsSlice.actions,
+    init,
     fetchPullRequests,
-    setRole,
 }
 const reducer = pullsSlice.reducer;
 

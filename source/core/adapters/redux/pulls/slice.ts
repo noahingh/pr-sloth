@@ -1,10 +1,30 @@
 import { Octokit } from '@octokit/rest';
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAction, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState, PullsState, LoadingStatus } from '../global';
-import { Paginator, QueryBuilder, Role } from '../../../models';
+import { RootState, PullsState, LoadingStatus, AppThunk } from '../global';
+import { Paginator, QueryBuilder } from '../../../models';
 import { mapPullRequestData } from './mapper';
 import * as types from './types';
+
+/**
+ * The init function initializes the pulls state,
+ * it sets the login to build a query.
+ */
+export function init(): AppThunk {
+    return (dispatch, getState) => {
+        const { login } = getState().signin;
+
+        dispatch(initAction(login))
+    }
+}
+
+const initAction = createAction('pulls/init', (login: string) => {
+    return {
+        payload: {
+            login,
+        }
+    }
+})
 
 export const fetchPullRequests = createAsyncThunk<
     types.FetchPullRequestsPayLoad,
@@ -34,23 +54,6 @@ export const fetchPullRequests = createAsyncThunk<
             return rejectWithValue(e)
         }
     },
-
-)
-
-// TODO: rename into buildQuery.
-export const setRole = createAsyncThunk<
-    types.SetRolePayLoad,
-    Role,
-    { state: RootState }
->(
-    'pulls/setRole',
-    async (role, { getState }) => {
-        const { login } = getState().signin;
-        return {
-            role,
-            login,
-        }
-    },
 )
 
 const initialState: PullsState = {
@@ -64,14 +67,32 @@ export const pullsSlice = createSlice({
     name: 'pulls',
     initialState,
     reducers: {
+        resetPage(state) {
+            state.loading = LoadingStatus.Idle;
+            state.paginator.reset();
+        },
         setPage(state, action: PayloadAction<types.SetPagePayload>) {
             const { page } = action.payload;
 
             state.loading = LoadingStatus.Idle;
             state.paginator.setPage(page);
         },
+        setRole(state, action: PayloadAction<types.SetRolePayLoad>) {
+            const { role } = action.payload;
+
+            state.loading = LoadingStatus.Idle;
+            state.builder.role = role;
+            console.log(role)
+        }
     },
     extraReducers: builder => {
+        builder.addCase(initAction, (state, action) => {
+            const { login } = action.payload;
+
+            state.loading = LoadingStatus.Idle;
+            state.builder.login = login;
+        })
+
         builder.addCase(fetchPullRequests.pending, (state) => {
             state.loading = LoadingStatus.Loading;
         })
@@ -86,15 +107,6 @@ export const pullsSlice = createSlice({
             state.loading = LoadingStatus.Success;
             state.paginator.total = total;
             state.items = items;
-        })
-
-        builder.addCase(setRole.fulfilled, (state, action) => {
-            const { role, login } = action.payload;
-
-            state.loading = LoadingStatus.Idle;
-            state.paginator.reset(0);
-            state.builder.login = login;
-            state.builder.role = role;
         })
     }
 })

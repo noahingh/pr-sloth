@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
 import { signin, pulls, global } from '../core/adapters/redux';
+import { Role } from '../core/models';
 
 const { actions, types } = pulls;
 const { LoadingStatus } = global;
@@ -13,19 +14,19 @@ const { LoadingStatus } = global;
 const searchBys = [
   {
     display: 'Created',
-    value: types.Role.Author,
+    value: Role.Author,
   },
   {
     display: 'Assigned',
-    value: types.Role.Assignee,
+    value: Role.Assignee,
   },
   {
     display: 'Mentioned',
-    value: types.Role.Mentions,
+    value: Role.Mentions,
   },
   {
     display: 'Review requests',
-    value: types.Role.ReviewRequested,
+    value: Role.ReviewRequested,
   },
 ];
 
@@ -102,15 +103,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     init: () => {
-      dispatch(actions.setRole(types.Role.Author));
+      dispatch(actions.init());
       dispatch(actions.fetchPullRequests());
     },
-    setSearchBy: (value) => {
-      dispatch(actions.setRole(value));
+    setSearchBy: (role) => {
+      dispatch(actions.setRole({ role }));
+      dispatch(actions.resetPage());
       dispatch(actions.fetchPullRequests());
     },
     setPage: (page) => {
-      dispatch(actions.setPage(page));
+      dispatch(actions.setPage({ page }));
       dispatch(actions.fetchPullRequests());
     },
     signout: () => {
