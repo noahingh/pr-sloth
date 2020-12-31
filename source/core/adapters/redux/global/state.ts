@@ -12,7 +12,6 @@ export interface SigninState {
 }
 
 export interface PullsState {
-    type: string;
     loading: LoadingStatus;
     items: Array<PullRequest>;
     paginator: Paginator;

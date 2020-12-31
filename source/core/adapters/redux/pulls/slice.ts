@@ -54,7 +54,6 @@ export const setRole = createAsyncThunk<
 )
 
 const initialState: PullsState = {
-    type: '',
     loading: LoadingStatus.Idle,
     items: [],
     paginator: new Paginator(0),
