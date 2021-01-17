@@ -15,6 +15,7 @@
         "skipLibCheck": true,	
 		"allowJs": true,
 		"outDir": "./dist",
+		"moduleResolution": "node"
 	},	
 	"include": [	
 		"source",	

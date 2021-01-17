@@ -6,5 +6,6 @@ export type {
 
 export {
     LoadingStatus,
-} from './state';
+} from './models';
+
 export type { AppThunk } from './thunk';
