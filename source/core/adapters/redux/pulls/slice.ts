@@ -1,17 +1,23 @@
 import { Octokit } from '@octokit/rest';
 import { createSlice, createAction, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState, PullsState, LoadingStatus, AppThunk } from '../global';
-import { QueryBuilder } from '../../../models';
+import { RootState, PullsState, LoadingStatus, Role, AppThunk } from '../global';
 import { mapPullRequestData } from './mapper';
 import * as types from './types';
+import { buildQuery } from './builder'
 
 const initialState: PullsState = {
     loading: LoadingStatus.Idle,
     items: [],
     total: 0,
     page: 1,
-    builder: new QueryBuilder(),
+    query: {
+        role: Role.Author,
+        login: '',
+        opened: true,
+        archived: false,
+    },
+    q: '',
 };
 
 /**
@@ -19,10 +25,9 @@ const initialState: PullsState = {
  * it sets the login to build a query.
  */
 export function init(): AppThunk {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const { login } = getState().signin;
-
-        dispatch(initAction(login))
+        await dispatch(initAction(login))
     }
 }
 
@@ -41,11 +46,9 @@ export const fetchPullRequests = createAsyncThunk<
 >(
     'pulls/fetchPullRequests',
     async (_, { getState, rejectWithValue }) => {
-        const { signin, pulls, } = getState();
-        const { token } = signin;
-        const { builder, page } = pulls
-        const per_page = 3
-        const q = builder.buildQuery();
+        const { token } = getState().signin;
+        const { page, query } = getState().pulls
+        const q = buildQuery(query)
 
         try {
             const octokit = new Octokit({ auth: token });
@@ -53,7 +56,7 @@ export const fetchPullRequests = createAsyncThunk<
             const { data } = await octokit.search.issuesAndPullRequests({
                 q,
                 page,
-                per_page,
+                per_page: 3,
             });
 
             return {
@@ -85,7 +88,7 @@ export const pullsSlice = createSlice({
             const { role } = action.payload;
 
             state.loading = LoadingStatus.Idle;
-            state.builder.role = role;
+            state.query.role = role;
         }
     },
     extraReducers: builder => {
@@ -93,11 +96,12 @@ export const pullsSlice = createSlice({
             const { login } = action.payload;
 
             state.loading = LoadingStatus.Idle;
-            state.builder.login = login;
+            state.query.login = login;
         })
 
         builder.addCase(fetchPullRequests.pending, (state) => {
             state.loading = LoadingStatus.Loading;
+            state.q = buildQuery(state.query)
         })
 
         builder.addCase(fetchPullRequests.rejected, (state) => {

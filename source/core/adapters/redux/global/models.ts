@@ -19,3 +19,17 @@ export type Repo = {
     owner: string;
     repo: string;
 }
+
+export enum Role {
+    Author = "author",
+    Assignee = "assignee",
+    Mentions = "mentions",
+    ReviewRequested = "review-requested",
+}
+
+export type Query = {
+    role: Role;
+    login: string;
+    opened: boolean;
+    archived: boolean;
+}

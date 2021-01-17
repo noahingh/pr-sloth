@@ -6,10 +6,9 @@ import { connect } from 'react-redux'
 import PRList from '../components/PRList';
 import SearchByTabs from '../components/SearchByTabs';
 import { signin, pulls, global } from '../core/adapters/redux';
-import { Role } from '../core/models';
 
 const { actions, types } = pulls;
-const { LoadingStatus } = global;
+const { LoadingStatus, Role } = global;
 
 const searchBys = [
   {
@@ -75,11 +74,11 @@ export class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { loading, items, total, page, paginator, builder } = state.pulls;
+  const { loading, items, total, page, q} = state.pulls;
 
   return {
     loading: (loading == LoadingStatus.Loading) ? true : false,
-    q: builder.buildQuery(),
+    q,
     total,
     page,
     items: items.map(item => {

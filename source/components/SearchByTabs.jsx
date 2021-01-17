@@ -34,7 +34,7 @@ SearchByTabs.propTypes = {
      */
     searchBys: PropTypes.arrayOf(PropTypes.exact({
         display: PropTypes.string,
-        value: PropTypes.number,
+        value: PropTypes.string,
     })),
     /**
      * Function of onChange.

@@ -1,5 +1,4 @@
-import {  QueryBuilder } from '../../../models'
-import { LoadingStatus, PullRequest } from './models'
+import { LoadingStatus, PullRequest, Query } from './models'
 
 export interface RootState {
     signin: SigninState;
@@ -17,5 +16,6 @@ export interface PullsState {
     items: Array<PullRequest>;
     total: number;
     page: number;
-    builder: QueryBuilder;
+    query: Query;
+    q: string;
 }
