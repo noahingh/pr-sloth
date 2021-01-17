@@ -6,6 +6,11 @@ export type {
 
 export {
     LoadingStatus,
-} from './models';
+} from './models'
 
-export type { AppThunk } from './thunk';
+export type {
+    PullRequest,
+    Repo,
+} from './models'
+
+export type { AppThunk } from './thunk'

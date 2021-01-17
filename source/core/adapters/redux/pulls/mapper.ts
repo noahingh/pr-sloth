@@ -1,4 +1,4 @@
-import { PullRequest, Repo } from '../../../models';
+import { PullRequest } from '../global'
 
 export function mapPullRequestData(item: {
     number: number;
@@ -10,19 +10,19 @@ export function mapPullRequestData(item: {
         login: string;
     };
     created_at: string;
-}) {
+}): PullRequest {
     const { owner, repo } = parseRepositoryUrl(item.repository_url)
 
-    return new PullRequest({
+    return {
         ...item,
         htmlUrl: item.html_url,
-        repo: new Repo({
+        repo: {
             owner,
             repo,
-        }),
+        },
         creator: item.user.login,
         createdAt: new Date(item.created_at),
-    });
+    };
 }
 
 function parseRepositoryUrl(url: string) {

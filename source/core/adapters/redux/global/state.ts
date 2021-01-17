@@ -1,5 +1,5 @@
-import {  PullRequest, QueryBuilder } from '../../../models'
-import { LoadingStatus } from './models'
+import {  QueryBuilder } from '../../../models'
+import { LoadingStatus, PullRequest } from './models'
 
 export interface RootState {
     signin: SigninState;

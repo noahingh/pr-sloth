@@ -1,4 +1,5 @@
-import { PullRequest, Role } from '../../../models';
+import { Role } from '../../../models';
+import { PullRequest } from '../global'
 
 export interface FetchPullRequestsPayLoad {
     total: number;

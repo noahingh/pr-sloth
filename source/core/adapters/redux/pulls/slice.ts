@@ -46,6 +46,7 @@ export const fetchPullRequests = createAsyncThunk<
         const { builder, page } = pulls
         const per_page = 3
         const q = builder.buildQuery();
+
         try {
             const octokit = new Octokit({ auth: token });
 
