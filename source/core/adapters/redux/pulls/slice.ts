@@ -2,9 +2,17 @@ import { Octokit } from '@octokit/rest';
 import { createSlice, createAction, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState, PullsState, LoadingStatus, AppThunk } from '../global';
-import { Paginator, QueryBuilder } from '../../../models';
+import { QueryBuilder } from '../../../models';
 import { mapPullRequestData } from './mapper';
 import * as types from './types';
+
+const initialState: PullsState = {
+    loading: LoadingStatus.Idle,
+    items: [],
+    total: 0,
+    page: 1,
+    builder: new QueryBuilder(),
+};
 
 /**
  * The init function initializes the pulls state,
@@ -35,15 +43,16 @@ export const fetchPullRequests = createAsyncThunk<
     async (_, { getState, rejectWithValue }) => {
         const { signin, pulls, } = getState();
         const { token } = signin;
-        const { builder, paginator } = pulls
+        const { builder, page } = pulls
+        const per_page = 3
         const q = builder.buildQuery();
         try {
             const octokit = new Octokit({ auth: token });
 
             const { data } = await octokit.search.issuesAndPullRequests({
                 q,
-                page: paginator.page,
-                per_page: paginator.perPage,
+                page,
+                per_page,
             });
 
             return {
@@ -56,33 +65,26 @@ export const fetchPullRequests = createAsyncThunk<
     },
 )
 
-const initialState: PullsState = {
-    loading: LoadingStatus.Idle,
-    items: [],
-    paginator: new Paginator(0),
-    builder: new QueryBuilder(),
-};
-
 export const pullsSlice = createSlice({
     name: 'pulls',
     initialState,
     reducers: {
         resetPage(state) {
             state.loading = LoadingStatus.Idle;
-            state.paginator.reset();
+            state.total = 0
+            state.page = 1
         },
         setPage(state, action: PayloadAction<types.SetPagePayload>) {
             const { page } = action.payload;
 
             state.loading = LoadingStatus.Idle;
-            state.paginator.setPage(page);
+            state.page = page
         },
         setRole(state, action: PayloadAction<types.SetRolePayLoad>) {
             const { role } = action.payload;
 
             state.loading = LoadingStatus.Idle;
             state.builder.role = role;
-            console.log(role)
         }
     },
     extraReducers: builder => {
@@ -105,7 +107,7 @@ export const pullsSlice = createSlice({
             const { total, items } = action.payload;
 
             state.loading = LoadingStatus.Success;
-            state.paginator.total = total;
+            state.total = total;
             state.items = items;
         })
     }

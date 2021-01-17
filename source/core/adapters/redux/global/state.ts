@@ -1,4 +1,4 @@
-import { Paginator, PullRequest, QueryBuilder } from '../../../models'
+import {  PullRequest, QueryBuilder } from '../../../models'
 import { LoadingStatus } from './models'
 
 export interface RootState {
@@ -15,6 +15,7 @@ export interface SigninState {
 export interface PullsState {
     loading: LoadingStatus;
     items: Array<PullRequest>;
-    paginator: Paginator;
+    total: number;
+    page: number;
     builder: QueryBuilder;
 }

@@ -65,7 +65,7 @@ export class Main extends React.Component {
           loading={this.props.loading}
           total={this.props.total}
           page={this.props.page}
-          perPage={this.props.perPage}
+          pageSize={3}
           items={this.props.items}
           onPagination={this.props.setPage}
         />
@@ -75,14 +75,13 @@ export class Main extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { type, loading, items, paginator, builder } = state.pulls;
+  const { loading, items, total, page, paginator, builder } = state.pulls;
 
   return {
     loading: (loading == LoadingStatus.Loading) ? true : false,
     q: builder.buildQuery(),
-    total: paginator.total,
-    page: paginator.page,
-    perPage: paginator.perPage,
+    total,
+    page,
     items: items.map(item => {
       return {
         number: item.number,

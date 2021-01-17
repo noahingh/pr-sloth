@@ -24,10 +24,10 @@ export default class PRList extends React.Component<PRListProps> {
 
         const pagination: PaginationConfig = {
             current: this.props.page,
-            pageSize: this.props.perPage,
             total: this.props.total,
-            onChange: (page, pageSize) => {
-                this.props.onPagination(page, pageSize);
+            pageSize: this.props.pageSize,
+            onChange: (page) => {
+                this.props.onPagination(page);
             },
         }
 
