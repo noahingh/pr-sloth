@@ -10,6 +10,7 @@ export type PRListProps = {
     loading: boolean;
     total: number;
     page: number;
+    pageSize: number;
     perPage: number;
     onPagination(page: number, perPage?: number): void;
     items: Array<PRItemProps>;

@@ -15,7 +15,9 @@
         "skipLibCheck": true,	
 		"allowJs": true,
 		"outDir": "./dist",
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"jsx": "react",
+		"allowSyntheticDefaultImports": true
 	},	
 	"include": [	
 		"source",	
